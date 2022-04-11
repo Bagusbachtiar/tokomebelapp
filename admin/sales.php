@@ -207,9 +207,13 @@
 													<td><?php echo $p['merk'] ?></td>
 													<td><?php echo $p['date'] ?></td>
                                                     <td><?php echo $p[''] ?></td>
+
+                                                    <?php
+                                                    // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
 													<td scope="row">
-                                                         <a href="tagihan.php"><button type="button" class="btn btn-warning">masuk</button></a>
-                                                    </td>
+                                                         <a href="viewtagihan.php?id=<?php echo $p['idsales'] ?>" button type="button" class="btn btn-warning">masuk</button></a>
+                                                    
+                                                         </td>
 												</tr>		
 												
 												<?php 
@@ -268,16 +272,6 @@
 				</div>
 			</div>
 	
-	<script>
-	$(document).ready(function() {
-    $('#dataTable3').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'print'
-        ]
-    } );
-	} );
-	</script>
 	
 	<!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

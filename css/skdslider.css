@@ -1,21 +1,26 @@
+/* background-color: #ffffff10; */
 .skdslider{
-	 width:100%;
+	 width:90%;
 	 position: relative;
 	 display: block;
 	 overflow:hidden;
-	 height: 500px;
+	 height: 600px;
+	 margin: auto;
+	
 }
 
 .skdslider:after {
     content: '';
     padding-top: 50%; 
     display: block;
+	
 }
 
 .skdslider ul.slides{ margin:0; padding:0; list-style-type:none;}
 .skdslider ul.slides li
 {
    display: none;
+   
 }
 .skdslider ul.slides li img{
     width: 100%;
@@ -367,3 +372,6 @@ text-decoration:underline;
 	 line-height: 26px;
 }
 }
+.produk{
+    background-color: #c6191910;
+  }
