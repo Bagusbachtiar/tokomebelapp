@@ -209,7 +209,7 @@ include 'dbconnect.php';
 									<div class="hover14 column">
 										<div class="agile_top_brand_left_grid">
 											<div class="agile_top_brand_left_grid_pos">
-												<img src="images/offer.png" alt=" " class="img-responsive" />
+												<!-- <img src="images/offer.png" alt=" " class="img-responsive" /> -->
 											</div>
 											<div class="agile_top_brand_left_grid1">
 												<figure>
