@@ -272,10 +272,10 @@ include 'dbconnect.php';
 			<h3 class="w3_agile_header">Tentang Kami</h3>
 			<div class="about-agileinfo w3layouts">
 				<div class="col-md-8 about-wthree-grids grid-top">
-					<h4>Tokopekita adalah salah satu proyek toko online berbasis Web</h4>
-					<p class="top">Template : MarketPlace W3Layouts
+					<h4>TokoMebel adalah salah satu proyek toko online berbasis Web</h4>
+					<p class="top">Top Facts
 					<br>
-					Fitur E-Commerce pada web ini dikembangkan oleh Richard's Lab</p>
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 				</div>
 			</div>
 		</div>
