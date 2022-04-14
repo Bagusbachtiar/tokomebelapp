@@ -274,6 +274,7 @@ include 'dbconnect.php';
 				<div class="col-md-8 about-wthree-grids grid-top">
 					<h4>TokoMebel adalah salah satu proyek toko online berbasis Web</h4>
 					<p class="top">Top Facts
+						
 					<br>
 					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 				</div>
