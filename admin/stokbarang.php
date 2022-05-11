@@ -111,7 +111,6 @@
                                     <li><a href="kategori.php">Kategori</a></li>
                                     <li><a href="produk.php">Produk</a></li>
 									<li><a href="pembayaran.php">Metode Pembayaran</a></li>
-                                    <li><a href="stokbarang.php">Stok Barang</a></li>
                                     <li class="active"><a href="sales.php">Tagihan Sales</a></li>
 
                                 </ul>
