@@ -124,6 +124,7 @@
                                     <li class="active"><a href="produk.php">Produk</a></li>
 									<li><a href="pembayaran.php">Metode Pembayaran</a></li>
 									<li><a href="sales.php">Tagihan Sales</a></li>
+									<li><a href="stokbarang.php">Stok Barang</a></li>
                                 </ul>
                             </li>
 							<li><a href="customer.php"><span>Kelola Pelanggan</span></a></li>
