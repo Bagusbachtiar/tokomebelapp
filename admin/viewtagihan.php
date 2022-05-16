@@ -75,30 +75,9 @@
                     <nav>
                         <ul class="metismenu" id="menu">
 							<li><a href="index.php"><span>Home</span></a></li>
-							<li><a href="../"><span>Kembali ke Toko</span></a></li>
-							<li>
-                                <a href="manageorder.php"><i class="ti-dashboard"></i><span>Kelola Pesanan</span></a>
-                            </li>
-							<li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout"></i><span>Kelola Toko
-                                    </span></a>
-                                <ul class="collapse">
-                                    <li class="active"><a href="kategori.php">Kategori</a></li>
-                                    <li><a href="produk.php">Produk</a></li>
-									<li><a href="pembayaran.php">Metode Pembayaran</a></li>
-                                    <li><a href="sales.php">Daftar Sales</a></li>
-                                    <li><a href="stokbarang.php">Stok Barang</a></li>
-
-                                </ul>
-                            </li>
-							<li><a href="customer.php"><span>Kelola Pelanggan</span></a></li>
-							<li><a href="user.php"><span>Kelola Staff</span></a></li>
-                            <li>
-                                <a href="../logout.php"><span>Logout</span></a>
-                                
-                            </li>
-                            
-                        </ul>
+							<li><a href="sales.php"><span>Kembali </span></a></li>
+							
+							
                     </nav>
                 </div>
             </div>
