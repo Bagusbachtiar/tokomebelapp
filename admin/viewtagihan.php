@@ -3,7 +3,7 @@
 	session_start();
 	include '../dbconnect.php';
 	
-	$id = $_GET['idsales'];
+	
 	if(isset($_POST['addtagihan']))
 	{
 		$namakategori = $_POST['idtagihansal'];
@@ -122,70 +122,62 @@
             </div>
             
             
-            <!-- page title area end -->
-            <div class="main-content-inner">
+          <!-- page title area end -->
+          <div class="main-content-inner">
                
-                <!-- market value area start -->
-                <div class="row mt-5 mb-5">
-                    <div class="col-12">
-					<h2>Detail Tagihan</h2>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-sm-flex justify-content-between align-items-center">
-									
-									<button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Kategori</button>
-                                </div>
-                                    <div class="data-tables datatable-dark">
-										 <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
-											<tr>
-												<th>No.</th>
-												<th>Nama Kategori</th>
-												<th>Jumlah Produk</th>
-												<th>Tanggal Dibuat</th>
-											</tr></thead><tbody>
-											<?php 
-											$brgs=mysqli_query($conn,"SELECT * from kategori order by idkategori ASC");
-											$no=1;
-											while($p=mysqli_fetch_array($brgs)){
-												$id = $p['idkategori'];
+               <!-- market value area start -->
+               <div class="row mt-5 mb-5">
+                   <div class="col-12">
+                       <div class="card">
+                           <div class="card-body">
+                               <div class="d-sm-flex justify-content-between align-items-center">
+                                   <h2>Daftar Sales</h2>
+                                   <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Sales</button>
+                               </div>
+                                   <div class="data-tables datatable-dark">
+                                        <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
+                                        <tr>
+                                               <th>Nama sales</th>
+                                               <th>Merk</th>
+                                               <th>Tanggal</th>
+                                               <th>Jumlah Produk</th>
+                                               <th></th>
+                                               
+                                               <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>
 
-												?>
-												
-												<tr>
-													<td><?php echo $no++ ?></td>
-													<td><?php echo $p['namakategori'] ?></td>
-													<td><?php 
-												
-														$result1 = mysqli_query($conn,"SELECT Count(idproduk) AS count FROM produk p, kategori k where p.idkategori=k.idkategori and k.idkategori='$id' order by idproduk ASC");
-														$cekrow = mysqli_num_rows($result1);
-														$row1 = mysqli_fetch_assoc($result1);
-														$count = $row1['count'];
-														if($cekrow > 0){
-														echo number_format($count);
-														} else {
-															echo 'No data';
-														}
-													?></td>
-													<td><?php echo $p['tgldibuat'] ?></td>
-													
-												</tr>		
-												
-												<?php 
-											}
-											
-											?>
-										</tbody>
-										</table>
-                                    </div>
-								 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              
-                
-                <!-- row area start-->
-            </div>
+                                           </tr></thead><tbody>
+                                           <?php 
+                                           // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
+                                           $sal=mysqli_query($conn,"SELECT * from sales where idsales $id");
+                                           while($p=mysqli_fetch_array($sal)){
+                                               $id = $p['idsales'];
+
+                                               ?>
+                                               
+                                               <tr>
+                                                   <td><?php echo $p['namasales'] ?></td>
+                                                   <td><?php echo $p['merk'] ?></td>
+                                                   <td><?php echo $p['date'] ?></td>
+                                                   <td><?php echo $p[''] ?></td>
+
+                                                   <?php
+                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
+                                                   
+                                               </tr>		
+                                               
+                                               <?php } ?>
+                                       </tbody>
+                                       </table>
+                                   </div>
+                                </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+             
+               
+               <!-- row area start-->
+           </div>
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
