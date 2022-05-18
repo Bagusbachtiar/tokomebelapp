@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2022 at 05:41 AM
+-- Generation Time: May 18, 2022 at 09:42 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -55,6 +55,23 @@ CREATE TABLE `detailorder` (
   `orderid` varchar(100) NOT NULL,
   `idproduk` int(11) NOT NULL,
   `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detailtagihan`
+--
+
+CREATE TABLE `detailtagihan` (
+  `id` int(11) NOT NULL,
+  `idproduk` int(11) NOT NULL,
+  `idtagihan` int(11) NOT NULL,
+  `idkategori` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `hargasatuan` int(11) NOT NULL,
+  `createdat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -210,10 +227,11 @@ INSERT INTO `sales` (`idsales`, `namasales`, `merk`, `date`) VALUES
 
 CREATE TABLE `tagihan` (
   `idsales` int(11) NOT NULL,
-  `idtagihansal` int(11) NOT NULL,
-  `produk` int(11) NOT NULL,
-  `hargasatuan` decimal(10,0) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `idtagihan` int(11) NOT NULL,
+  `totaltagihan` decimal(10,2) NOT NULL,
+  `createdat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `expirationdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -235,6 +253,12 @@ ALTER TABLE `detailorder`
   ADD PRIMARY KEY (`detailid`),
   ADD KEY `orderid` (`orderid`),
   ADD KEY `idproduk` (`idproduk`);
+
+--
+-- Indexes for table `detailtagihan`
+--
+ALTER TABLE `detailtagihan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `kategori`
@@ -278,7 +302,7 @@ ALTER TABLE `sales`
 -- Indexes for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  ADD PRIMARY KEY (`idtagihansal`);
+  ADD PRIMARY KEY (`idtagihan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -295,6 +319,12 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `detailorder`
   MODIFY `detailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `detailtagihan`
+--
+ALTER TABLE `detailtagihan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -336,7 +366,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  MODIFY `idtagihansal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idtagihan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
