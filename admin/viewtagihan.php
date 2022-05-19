@@ -1,21 +1,54 @@
-
 <?php 
 	session_start();
 	include '../dbconnect.php';
-	
-	
-	if(isset($_POST['addtagihan']))
-	{
-		$namakategori = $_POST['idtagihansal'];
-			  
-		$tambahkat = mysqli_query($conn,"insert into kategori (namakategori) values ('$namakategori')");
-		if ($tambahkat){
-		echo "
-		<meta http-equiv='refresh' content='1; url= kategori.php'/>  ";
-		} else { echo "
-		 <meta http-equiv='refresh' content='1; url= kategori.php'/> ";
-		}
+
+    if(isset($_POST["addtagihan"])) {
+		$idkategori=$_POST['idkategori'];
+		$jumlah=$_POST['jumlah'];
+		$hargasatuan=$_POST['hargasatuan'];
 		
+		$nama_file = $_FILES['uploadgambar']['name'];
+		$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
+		$random = crypt($nama_file, time());
+		$ukuran_file = $_FILES['uploadgambar']['size'];
+		$tipe_file = $_FILES['uploadgambar']['type'];
+		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
+		$path = "../viewtagihan/".$random.'.'.$ext;
+		$pathdb = "viewtagihan/".$random.'.'.$ext;
+
+		if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
+		  if($ukuran_file <= 5000000){ 
+			if(move_uploaded_file($tmp_file, $path)){ 
+			
+			  $query = "insert into detailtagihan (idkategori, gambar, deskripsi, jumlah, hargasatuan)
+			  values('$idkategori', '$pathdb', '$deskripsi', '$jumlah','$hargasatuan')";
+			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
+			  
+			  if($sql){ 
+				
+				echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+					
+			  }else{
+				// Jika Gagal, Lakukan :
+				echo "Sorry, there's a problem while submitting.";
+				echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+			  }
+			}else{
+			  // Jika gambar gagal diupload, Lakukan :
+			  echo "Sorry, there's a problem while uploading the file.";
+			  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+			}
+		  }else{
+			// Jika ukuran file lebih dari 1MB, lakukan :
+			echo "Sorry, the file size is not allowed to more than 1mb";
+			echo "<br><meta http-equiv='refresh' content='5; URL=vieewtagihan.php'> You will be redirected to the form in 5 seconds";
+		  }
+		}else{
+		  // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
+		  echo "Sorry, the image format should be JPG/PNG.";
+		  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+		}
+	
 	};
 	?>
 
@@ -137,28 +170,28 @@
                                    <div class="data-tables datatable-dark">
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
                                         <tr>
-                                               <th>Nama sales</th>
-                                               <th>Merk</th>
+                                               
+                                               <th>Jumlah</th>
                                                <th>Tanggal</th>
-                                               <th>Jumlah Produk</th>
-                                               <th></th>
+                                               <th>Harga</th>
+                                               <th>Tanggal</th>
                                                
                                                <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>
 
                                            </tr></thead><tbody>
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
-                                           $sal=mysqli_query($conn,"SELECT * from sales where idsales $id");
+                                           $sal=mysqli_query($conn,"SELECT * from detailtagihan where idtagihan = $id");
                                            while($p=mysqli_fetch_array($sal)){
-                                               $id = $p['idsales'];
+                                               $id = $p['idtagihan'];
 
                                                ?>
                                                
                                                <tr>
-                                                   <td><?php echo $p['namasales'] ?></td>
-                                                   <td><?php echo $p['merk'] ?></td>
-                                                   <td><?php echo $p['date'] ?></td>
-                                                   <td><?php echo $p[''] ?></td>
+                                               <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td>
+													<td><?php echo $p['jumlah'] ?></td>
+													<td><?php echo $p['hargasatuan'] ?></td>
+													<td><?php echo $p['tgldibuat'] ?></td>
 
                                                    <?php
                                                    // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
@@ -191,23 +224,59 @@
     <!-- page container area end -->
 	
 	<!-- modal input -->
-			<div id="myModal" class="modal fade">
+    <div id="myModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title">Tambah Kategori</h4>
+							<h4 class="modal-title">Tambah Produk</h4>
 						</div>
+						
 						<div class="modal-body">
-							<form method="post">
+						<form action="viewtagihan.php" method="post" enctype="multipart/form-data" >
+								<!-- <div class="form-group">
+									<label>Nama Produk</label>
+									<input name="namaproduk" type="text" class="form-control" required autofocus>
+								</div> -->
 								<div class="form-group">
 									<label>Nama Kategori</label>
-									<input name="namakategori" type="text" class="form-control" required autofocus>
+									<select name="idkategori" class="form-control">
+									<option selected>Pilih Kategori</option>
+									<?php
+									$det=mysqli_query($conn,"select * from kategori order by namakategori ASC")or die(mysqli_error());
+									while($d=mysqli_fetch_array($det)){
+									?>
+										<option value="<?php echo $d['idkategori'] ?>"><?php echo $d['namakategori'] ?></option>
+										<?php
+								}
+								?>		
+									</select>
+									
+								</div>
+								<div class="form-group">
+									<label>Deskripsi</label>
+									<input name="deskripsi" type="text" class="form-control" required>
+								</div>
+								<!-- <div class="form-group">
+									<label>Rating (1-5)</label>
+									<input name="rate" type="number" class="form-control"  min="1" max="5" required>
+								</div> -->
+								<div class="form-group">
+									<label>Jumlah</label>
+									<input name="jumlah" type="number" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Harga Satuan</label>
+									<input name="hargasatuan" type="number" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Gambar</label>
+									<input name="uploadgambar" type="file" class="form-control">
 								</div>
 
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-								<input name="addcategory" type="submit" class="btn btn-primary" value="Tambah">
+								<input name="addtagihan" type="submit" class="btn btn-primary" value="Tambah">
 							</div>
 						</form>
 					</div>
