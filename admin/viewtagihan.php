@@ -171,31 +171,39 @@
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
                                         <tr>
                                                
-                                               <th>Jumlah</th>
+                                               <th>---</th>
                                                <th>Tanggal</th>
-                                               <th>Harga</th>
+                                               <th>TotalTagihan</th>
                                                <th>Tanggal</th>
+                                               <th></th>
+                                        
                                                
-                                               <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>
 
                                            </tr></thead><tbody>
+                                               
+
+                                           
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
-                                           $sal=mysqli_query($conn,"SELECT * FROM tagihan WHERE idsales='$idsales'");
+                                           $idsales=$_GET['id'];
+                                           $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
                                            while($p=mysqli_fetch_array($sal)){
-                                               $id = $p['idtagihan'];
+                                               $id = $p['idsales'];
 
                                                ?>
                                                
                                                <tr>
+                                               <td><?php echo $p['idtagihan'] ?></td>
                                                <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td>
-													<td><?php echo $p['jumlah'] ?></td>
-													<td><?php echo $p['hargasatuan'] ?></td>
-													<td><?php echo $p['tgldibuat'] ?></td>
+													<td><?php echo $p['totaltagihan'] ?></td>
+													<td><?php echo $p['createdat'] ?></td>
 
                                                    <?php
                                                    // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
-                                                   
+                                                   <td scope="row">
+                                                         <a href="viewtagihan.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a>
+                                                    
+                                                         </td>
                                                </tr>		
                                                
                                                <?php } ?>
@@ -252,10 +260,10 @@
 									</select>
 									
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label>Deskripsi</label>
 									<input name="deskripsi" type="text" class="form-control" required>
-								</div>
+								</div> -->
 								<!-- <div class="form-group">
 									<label>Rating (1-5)</label>
 									<input name="rate" type="number" class="form-control"  min="1" max="5" required>

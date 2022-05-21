@@ -190,7 +190,7 @@
                                                 <th>Jumlah Produk</th>
                                                 <th></th>
                                                 
-                                                <!-- <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a> -->
+                                                <!-- <a href="index.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a> -->
 
 											</tr></thead><tbody>
 											<?php 
