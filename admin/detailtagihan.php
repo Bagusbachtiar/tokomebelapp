@@ -3,8 +3,9 @@
 	include '../dbconnect.php';
 
     if(isset($_POST["addtagihan"])) {
-
-        $expirationdate=$_POST['expirationdate'];
+		$idkategori=$_POST['idkategori'];
+		$jumlah=$_POST['jumlah'];
+		$hargasatuan=$_POST['hargasatuan'];
 		
 		$nama_file = $_FILES['uploadgambar']['name'];
 		$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
@@ -12,15 +13,15 @@
 		$ukuran_file = $_FILES['uploadgambar']['size'];
 		$tipe_file = $_FILES['uploadgambar']['type'];
 		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		$path = "../tagihan/".$random.'.'.$ext;
-		$pathdb = "tagihan/".$random.'.'.$ext;
+		$path = "../viewtagihan/".$random.'.'.$ext;
+		$pathdb = "viewtagihan/".$random.'.'.$ext;
 
 		if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
 		  if($ukuran_file <= 5000000){ 
 			if(move_uploaded_file($tmp_file, $path)){ 
 			
-			  $query = "insert into tagihan ( gambar, expirationdate)
-			  values( '$pathdb', '$expirationdate')";
+			  $query = "insert into detailtagihan (idkategori, gambar, deskripsi, jumlah, hargasatuan)
+			  values('$idkategori', '$pathdb', '$deskripsi', '$jumlah','$hargasatuan')";
 			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			  if($sql){ 
@@ -163,18 +164,19 @@
                        <div class="card">
                            <div class="card-body">
                                <div class="d-sm-flex justify-content-between align-items-center">
-                                   <h2>Daftar Tagihan</h2>
-                                   <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Tagihan</button>
+                                   <h2>Detail Tagihan</h2>
+                                   <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Sales</button>
                                </div>
                                    <div class="data-tables datatable-dark">
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
                                         <tr>
                                                
-                                               <th>Gambar</th>
-                                               <th>TotalTagihan</th>
-                                               <th>Dibuat</th>
-                                               <th>jatuh tempo</th>
-                                               <th></th>
+                                               <th>jumlah</th>
+                                               <th>harga satuan</th>
+                                               <th>kategori</th>
+                                               <th>Tanggal Dibuat</th>
+                                               <th>Tanggal Diupdate</th>
+
                                         
                                                
 
@@ -185,21 +187,23 @@
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
                                            $idsales=$_GET['id'];
-                                           $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
+                                           $sal=mysqli_query($conn,"SELECT * FROM detailtagihan, tagihan WHERE detailtagihan.id = tagihan.idsales"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
                                                ?>
                                                <tr>
-                                               <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td>
-                                               <td><?php echo $p['totaltagihan'] ?></td>
+                                               <!-- <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td> -->
+                                               <td><?php echo $p['jumlah'] ?></td>
+                                               <td><?php echo $p['hargasatuan'] ?></td>
+                                               <td><?php echo $p['idkategori'] ?></td>
                                                <td><?php echo $p['createdat'] ?></td>
-                                               <td><?php echo $p['expirationdate'] ?></td>
+                                               <td><?php echo $p['updatedat'] ?></td>
 
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                        <a href="detailtagihan.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a>
+                                                        <a href="viewtagihan.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a>
                                                    
                                                         </td>
                                               </tr>
@@ -236,12 +240,30 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title">Tambah Tagihan</h4>
+							<h4 class="modal-title">Tambah Produk</h4>
 						</div>
 						
 						<div class="modal-body">
 						<form action="viewtagihan.php" method="post" enctype="multipart/form-data" >
-								
+								<!-- <div class="form-group">
+									<label>Nama Produk</label>
+									<input name="namaproduk" type="text" class="form-control" required autofocus>
+								</div> -->
+								<div class="form-group">
+									<label>Nama Kategori</label>
+									<select name="idkategori" class="form-control">
+									<option selected>Pilih Kategori</option>
+									<?php
+									$det=mysqli_query($conn,"select * from kategori order by namakategori ASC")or die(mysqli_error());
+									while($d=mysqli_fetch_array($det)){
+									?>
+										<option value="<?php echo $d['idkategori'] ?>"><?php echo $d['namakategori'] ?></option>
+										<?php
+								}
+								?>		
+									</select>
+									
+								</div>
 								<!-- <div class="form-group">
 									<label>Deskripsi</label>
 									<input name="deskripsi" type="text" class="form-control" required>
@@ -250,13 +272,13 @@
 									<label>Rating (1-5)</label>
 									<input name="rate" type="number" class="form-control"  min="1" max="5" required>
 								</div> -->
-								<!-- <div class="form-group">
+								<div class="form-group">
 									<label>Jumlah</label>
 									<input name="jumlah" type="number" class="form-control">
-								</div> -->
+								</div>
 								<div class="form-group">
-									<label>Jatuh Tempo</label>
-									<input name="expirationdate" type="date" class="form-control" required>
+									<label>Harga Satuan</label>
+									<input name="hargasatuan" type="number" class="form-control">
 								</div>
 								<div class="form-group">
 									<label>Gambar</label>
