@@ -12,15 +12,19 @@
 		$ukuran_file = $_FILES['uploadgambar']['size'];
 		$tipe_file = $_FILES['uploadgambar']['type'];
 		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		$path = "../tagihan/".$random.'.'.$ext;
-		$pathdb = "tagihan/".$random.'.'.$ext;
+		$path = "../viewtagihan/".$random.'.'.$ext;
+		$pathdb = "viewtagihan/".$random.'.'.$ext;
 
 		if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
 		  if($ukuran_file <= 5000000){ 
 			if(move_uploaded_file($tmp_file, $path)){ 
+            
+            $idsales=$_GET['id'];
+            $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
+			//   $query = "insert into tagihan where idsales ='$idsales'( gambar, expirationdate)
+            //   values( '$pathdb', '$expirationdate')";
+            $ins=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
 			
-			  $query = "insert into tagihan ( gambar, expirationdate)
-			  values( '$pathdb', '$expirationdate')";
 			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			  if($sql){ 
@@ -170,7 +174,7 @@
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
                                         <tr>
                                                
-                                               <th>Gambar</th>
+                                               <!-- <th>Gambar</th> -->
                                                <th>TotalTagihan</th>
                                                <th>Dibuat</th>
                                                <th>jatuh tempo</th>
@@ -191,7 +195,7 @@
                                                
                                                ?>
                                                <tr>
-                                               <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td>
+                                               <!-- <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td> -->
                                                <td><?php echo $p['totaltagihan'] ?></td>
                                                <td><?php echo $p['createdat'] ?></td>
                                                <td><?php echo $p['expirationdate'] ?></td>
@@ -199,7 +203,7 @@
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                        <a href="detailtagihan.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a>
+                                                        <a href="detailtagihan.php?op=edit&id="<?php echo $p['idtagihan'] ?>><button type="button" class="btn btn-warning">Edit</button></a>
                                                    
                                                         </td>
                                               </tr>

@@ -186,8 +186,8 @@
                                            
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
-                                           $idsales=$_GET['id'];
-                                           $sal=mysqli_query($conn,"SELECT * FROM detailtagihan, tagihan WHERE detailtagihan.id = tagihan.idsales"); 
+                                           $idtagihan=$_GET['id'];
+                                           $sal=mysqli_query($conn,"SELECT * FROM detailtagihan, tagihan WHERE detailtagihan.idtagihan = tagihan.idtagihan WHERE idtagihan ='$idtagihan'"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
