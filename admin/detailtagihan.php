@@ -186,8 +186,8 @@
                                            
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
-                                           $idtagihan=$_GET['id'];
-                                           $sal=mysqli_query($conn,"SELECT * FROM detailtagihan, tagihan WHERE detailtagihan.idtagihan = tagihan.idtagihan WHERE idtagihan ='$idtagihan'"); 
+                                           $idtag=$_GET['idtagihan'];
+                                           $sal=mysqli_query($conn,"SELECT B.jumlah, B.hargasatuan, B.idkategori, B.createdat, B.updatedat FROM tagihan A INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
