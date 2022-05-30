@@ -175,7 +175,7 @@
                                                <th>harga satuan</th>
                                                <th>kategori</th>
                                                <th>Tanggal Dibuat</th>
-                                               <th>Tanggal Diupdate</th>
+                                               <th>Tanggal Jatuh Tempo</th>
 
                                         
                                                
@@ -187,7 +187,7 @@
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
                                            $idtag=$_GET['idtagihan'];
-                                           $sal=mysqli_query($conn,"SELECT B.jumlah, B.hargasatuan, B.idkategori, B.createdat, B.updatedat FROM tagihan A INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
+                                           $sal=mysqli_query($conn,"SELECT A.expirationdate, B.jumlah, B.hargasatuan, B.idkategori, B.createdat FROM tagihan A  INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
@@ -198,12 +198,12 @@
                                                <td><?php echo $p['hargasatuan'] ?></td>
                                                <td><?php echo $p['idkategori'] ?></td>
                                                <td><?php echo $p['createdat'] ?></td>
-                                               <td><?php echo $p['updatedat'] ?></td>
+                                               <td><?php echo $p['expirationdate'] ?></td>
 
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                        <a href="viewtagihan.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a>
+                                                        <a href="viewtagihan.php?op=edit=<?php ['id']?>"><button type="button" class="btn btn-warning">Edit</button></a>
                                                    
                                                         </td>
                                               </tr>

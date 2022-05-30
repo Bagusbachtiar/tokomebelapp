@@ -203,7 +203,7 @@
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                        <a href="detailtagihan.php?op=edit&idtagihan=<?php echo $p['idtagihan'] ?>"><button type="button" class="btn btn-warning">Edit</button></a>
+                                                        <a href="detailtagihan.php?op=edit&idtagihan=<?php echo $p['idtagihan'] ?>"><button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
                                                    
                                                         </td>
                                               </tr>

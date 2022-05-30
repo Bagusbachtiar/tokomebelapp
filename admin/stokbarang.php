@@ -3,20 +3,20 @@
 	session_start();
 	include '../dbconnect.php';
 		
-	if(isset($_POST['addsales']))
-	{
-		$namasales = $_POST['namasales'];
-        $merk = $_POST['merk'];
+	// if(isset($_POST['addsales']))
+	// {
+	// 	$namasales = $_POST['namasales'];
+    //     $merk = $_POST['merk'];
 		
-		$tambahsal = mysqli_query($conn,"insert into sales (namasales, merk) values ('$namasales', '$merk')");
-		if ($tambahsal){
-		echo "
-		<meta http-equiv='refresh' content='1; url= sales.php'/>  ";
-		} else { echo "
-		 <meta http-equiv='refresh' content='1; url= sales.php'/> ";
-		}
+	// 	$tambahsal = mysqli_query($conn,"insert into sales (namasales, merk) values ('$namasales', '$merk')");
+	// 	if ($tambahsal){
+	// 	echo "
+	// 	<meta http-equiv='refresh' content='1; url= sales.php'/>  ";
+	// 	} else { echo "
+	// 	 <meta http-equiv='refresh' content='1; url= sales.php'/> ";
+	// 	}
 		
-	};
+	// };
 
 
     // if(isset($_POST["addsales"])) {
@@ -193,14 +193,13 @@
                                                 <!-- <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a> -->
 
 											</tr></thead><tbody>
-											<?php 
-											// $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
+											<!-- <?php 
                                             $sal=mysqli_query($conn,"SELECT *  from sales order by idsales ASC");
 											$no=1;
 											while($p=mysqli_fetch_array($sal)){
                                                 $id = $p['idsales'];
 
-												?>
+												?> -->
 												
 												<tr>
 													<td><?php echo $no++ ?></td>
