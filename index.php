@@ -56,10 +56,11 @@ include 'dbconnect.php';
 					';
 				} else {
 					
-					if($_SESSION['role']=='Member'){
+					if($_SESSION['role']=='Staff'){
 					echo '
 					<li style="color:white">Halo, '.$_SESSION["name"].'
 					<li><a href="logout.php">Keluar?</a></li>
+					<li><a href="admin">Admin Panel</a></li>
 					';
 					} else {
 					echo '

@@ -193,27 +193,23 @@
                                                 <!-- <a href="index.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a> -->
 
 											</tr></thead><tbody>
-											<!-- <?php 
+											<?php 
                                             $sal=mysqli_query($conn,"SELECT *  from sales order by idsales ASC");
 											$no=1;
 											while($p=mysqli_fetch_array($sal)){
                                                 $id = $p['idsales'];
 
-												?> -->
+												?>
 												
 												<tr>
-													<td><?php echo $no++ ?></td>
-													<td><?php echo $p['namasales'] ?></td>
-													<td><?php echo $p['merk'] ?></td>
-													<td><?php echo $p['date'] ?></td>
-                                                    <td><?php echo $p[''] ?></td>
+													
 
                                                     <?php
                                                     // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
-													<td scope="row">
-                                                         <a href="viewtagihan.php?id=<?php echo $p['idsales'] ?>" button type="button" class="btn btn-warning">masuk</button></a>
+													<!-- <td scope="row">
+                                                         <a href="viewtagihan.php?id=" button type="button" class="btn btn-warning">masuk</button></a>
                                                     
-                                                         </td>
+                                                         </td> -->
 												</tr>		
 												
 												<?php 

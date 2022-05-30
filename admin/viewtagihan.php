@@ -2,8 +2,14 @@
 	session_start();
 	include '../dbconnect.php';
 
-    if(isset($_POST["addtagihan"])) {
+    
 
+    if(isset($_POST["addtagihan"]))
+    
+     {
+        $idsales=$_GET['idsal'];
+
+        
         $expirationdate=$_POST['expirationdate'];
 		
 		$nama_file = $_FILES['uploadgambar']['name'];
@@ -15,16 +21,21 @@
 		$path = "../viewtagihan/".$random.'.'.$ext;
 		$pathdb = "viewtagihan/".$random.'.'.$ext;
 
+
 		if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
 		  if($ukuran_file <= 5000000){ 
 			if(move_uploaded_file($tmp_file, $path)){ 
             
-            $idsales=$_GET['id'];
+                
+            
+
             $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-			//   $query = "insert into tagihan where idsales ='$idsales'( gambar, expirationdate)
-            //   values( '$pathdb', '$expirationdate')";
-            $ins=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
-			
+			  $query = "insert into tagihan where idsales ='$idsales'( gambar, expirationdate)
+              values( '$pathdb', '$expirationdate')";
+            
+
+            // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
+            
 			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			  if($sql){ 
@@ -188,7 +199,7 @@
                                            
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
-                                           $idsales=$_GET['id'];
+                                           $idsales=$_GET['idsal'];
                                            $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {

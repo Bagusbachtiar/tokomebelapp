@@ -3,12 +3,16 @@
 	session_start();
 	include '../dbconnect.php';
 		
-	if(isset($_POST['adduser']))
+ if(isset($_POST['adduser']))
 	{
-		$username = $_POST['uname'];
-		$password = password_hash($_POST['upass'], PASSWORD_DEFAULT); 
+		$username = $_POST['namalengkap'];
+        $email = $_POST['email'];
+        $notelp = $_POST['notelp'];
+        $alamat = $_POST['alamat'];
+		$password = password_hash($_POST['password'], PASSWORD_DEFAULT); 
+        
 			  
-		$tambahuser = mysqli_query($conn,"insert into login values('','$username','$password')");
+		$tambahuser = mysqli_query($conn,"insert into login (namalengkap,email,notelp,alamat,password) values ('$username','$email','$notelp','$alamat','$password')");
 		if ($tambahuser){
 		echo " <div class='alert alert-success'>
 			Berhasil menambahkan staff baru.
@@ -157,8 +161,11 @@
                                 <div class="d-sm-flex justify-content-between align-items-center">
 									<h2>Daftar Staff</h2>
 									</div>
+                                    
                                     <div class="data-tables datatable-dark">
+                                        
 										 <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
+                                         <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Staff</button>
 											<tr>
 												<th>No.</th>
 												<th>Nama</th>
@@ -167,7 +174,7 @@
 												<th>Alamat</th>
 											</tr></thead><tbody>
 											<?php 
-											$brgs=mysqli_query($conn,"SELECT * from login where role='Admin' order by userid ASC");
+											$brgs=mysqli_query($conn,"SELECT * from login where role='Staff' order by userid ASC");
 											$no=1;
 											while($p=mysqli_fetch_array($brgs)){
 
@@ -211,7 +218,7 @@
     </div>
     <!-- page container area end -->
 	
-	<!-- modal input 
+	<!-- modal input  -->
 			<div id="myModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -222,11 +229,23 @@
 							<form method="post">
 								<div class="form-group">
 									<label>Username</label>
-									<input name="uname" type="text" class="form-control" placeholder="Username" required autofocus>
+									<input name="namalengkap" type="text" class="form-control" placeholder="Username" required autofocus>
+								</div>
+                                <div class="form-group">
+									<label>Email</label>
+									<input name="email" type="text" class="form-control" placeholder="Username" required autofocus>
+								</div>
+                                <div class="form-group">
+									<label>Notelp</label>
+									<input name="notelp" type="text" class="form-control" placeholder="Username" required autofocus>
+								</div>
+                                <div class="form-group">
+									<label>Alamat</label>
+									<input name="alamat" type="text" class="form-control" placeholder="Username" required autofocus>
 								</div>
 								<div class="form-group">
 									<label>Password</label>
-									<input name="upass" type="password" class="form-control" placeholder="Password">
+									<input name="password" type="password" class="form-control" placeholder="Password">
 								</div>
 
 							</div>
@@ -238,7 +257,7 @@
 					</div>
 				</div>
 			</div>
-	-->
+	
 	<script>
 	$(document).ready(function() {
     $('#dataTable3').DataTable( {

@@ -18,7 +18,7 @@ $timenow = date("j-F-Y-h:i:s A");
 	$queryuser = mysqli_query($conn,"SELECT * FROM login WHERE email='$email'");
 	$cariuser = mysqli_fetch_assoc($queryuser);
 		
-		if( password_verify($pass, $cariuser['password']) ) {
+		if(password_verify($pass, $cariuser['password'])){
 			$_SESSION['id'] = $cariuser['userid'];
 			$_SESSION['role'] = $cariuser['role'];
 			$_SESSION['notelp'] = $cariuser['notelp'];
@@ -26,8 +26,11 @@ $timenow = date("j-F-Y-h:i:s A");
 			$_SESSION['log'] = "Logged";
 			header('location:index.php');
 		} else {
-			echo 'Username atau password salah';
-			header("location:login.php");
+			echo "<div class='alert alert-warning'>
+			Gagal Submit, silakan ulangi lagi.
+		  </div>
+		 <meta http-equiv='refresh' /> ";
+			
 		}		
 	}
 

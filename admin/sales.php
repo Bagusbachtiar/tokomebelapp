@@ -222,7 +222,7 @@
                                                     <?php
                                                     // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
 													<td scope="row">
-                                                         <a href="viewtagihan.php?id=<?php echo $p['idsales'] ?>" button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
+                                                         <a href="viewtagihan.php?idsal=<?php echo $p['idsales'] ?>" button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
                                                     
                                                          </td>
 												</tr>		
