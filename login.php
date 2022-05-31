@@ -23,6 +23,7 @@ $timenow = date("j-F-Y-h:i:s A");
 			$_SESSION['role'] = $cariuser['role'];
 			$_SESSION['notelp'] = $cariuser['notelp'];
 			$_SESSION['name'] = $cariuser['namalengkap'];
+			$_SESSION['email'] = $cariuser['email'];
 			$_SESSION['log'] = "Logged";
 			header('location:index.php');
 		} else {
