@@ -7,8 +7,7 @@
     if(isset($_POST["addtagihan"]))
     
      {
-        $idsales=$_GET['idsal'];
-
+       
         
         $expirationdate=$_POST['expirationdate'];
 		
@@ -28,15 +27,14 @@
             
                 
             
-
-            $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-			  $query = "insert into tagihan where idsales ='$idsales'( gambar, expirationdate)
-              values( '$pathdb', '$expirationdate')";
+            
+            // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
+			  $query = "insert into tagihan (idsales, gambar, expirationdate) values ($idsales, $pathdb, $expirationdate)";
             
 
             // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
             
-			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
+			  $sql = mysqli_query($conn, $query,); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			  if($sql){ 
 				
