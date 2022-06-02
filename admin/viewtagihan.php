@@ -11,25 +11,25 @@
         
         $expirationdate=$_POST['expirationdate'];
 		
-		$nama_file = $_FILES['uploadgambar']['name'];
-		$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
-		$random = crypt($nama_file, time());
-		$ukuran_file = $_FILES['uploadgambar']['size'];
-		$tipe_file = $_FILES['uploadgambar']['type'];
-		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		$path = "../viewtagihan/".$random.'.'.$ext;
-		$pathdb = "viewtagihan/".$random.'.'.$ext;
+		// $nama_file = $_FILES['uploadgambar']['name'];
+		// $ext = pathinfo($nama_file, PATHINFO_EXTENSION);
+		// $random = crypt($nama_file, time());
+		// $ukuran_file = $_FILES['uploadgambar']['size'];
+		// $tipe_file = $_FILES['uploadgambar']['type'];
+		// $tmp_file = $_FILES['uploadgambar']['tmp_name'];
+		// $path = "../viewtagihan/".$random.'.'.$ext;
+		// $pathdb = "viewtagihan/".$random.'.'.$ext;
 
 
-		if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
-		  if($ukuran_file <= 5000000){ 
-			if(move_uploaded_file($tmp_file, $path)){ 
+		// if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
+		//   if($ukuran_file <= 5000000){ 
+		// 	if(move_uploaded_file($tmp_file, $path)){ 
             
                 
             
             
             // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-			  $query = "insert into tagihan (idsales, gambar, expirationdate) values ($idsales, $pathdb, $expirationdate)";
+			  $query = "insert into tagihan ( expirationdate) values ($expirationdate) where idsal = $idsales";
             
 
             // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
@@ -45,21 +45,21 @@
 				echo "Sorry, there's a problem while submitting.";
 				echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
 			  }
-			}else{
-			  // Jika gambar gagal diupload, Lakukan :
-			  echo "Sorry, there's a problem while uploading the file.";
-			  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-			}
-		  }else{
-			// Jika ukuran file lebih dari 1MB, lakukan :
-			echo "Sorry, the file size is not allowed to more than 1mb";
-			echo "<br><meta http-equiv='refresh' content='5; URL=vieewtagihan.php'> You will be redirected to the form in 5 seconds";
-		  }
-		}else{
-		  // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
-		  echo "Sorry, the image format should be JPG/PNG.";
-		  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-		}
+			// }else{
+			//   // Jika gambar gagal diupload, Lakukan :
+			//   echo "Sorry, there's a problem while uploading the file.";
+			//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+			// }
+		//   }else{
+		// 	// Jika ukuran file lebih dari 1MB, lakukan :
+		// 	echo "Sorry, the file size is not allowed to more than 1mb";
+		// 	echo "<br><meta http-equiv='refresh' content='5; URL=vieewtagihan.php'> You will be redirected to the form in 5 seconds";
+		//   }
+		// }else{
+		//   // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
+		//   echo "Sorry, the image format should be JPG/PNG.";
+		//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+		// }
 	
 	};
 	?>
@@ -271,10 +271,10 @@
 									<label>Jatuh Tempo</label>
 									<input name="expirationdate" type="date" class="form-control" required>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label>Gambar</label>
 									<input name="uploadgambar" type="file" class="form-control">
-								</div>
+								</div> -->
 
 							</div>
 							<div class="modal-footer">

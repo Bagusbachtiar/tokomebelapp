@@ -86,13 +86,13 @@ $timenow = date("j-F-Y-h:i:s A");
 					
 				</ul>
 			</div>
-			<div class="product_list_header">  
+			<!-- <div class="product_list_header">  
 					<form action="#" method="post" class="last"> 
 						<input type="hidden" name="cmd" value="_cart">
 						<input type="hidden" name="display" value="1">
 						<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
 					</form>  
-			</div>
+			</div> -->
 			<div class="clearfix"> </div>
 		</div>
 	</div>
@@ -173,7 +173,7 @@ $timenow = date("j-F-Y-h:i:s A");
 	<div class="breadcrumbs">
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-				<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+				<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
 				<li class="active">Halaman Login</li>
 			</ol>
 		</div>

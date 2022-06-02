@@ -75,10 +75,10 @@ include 'dbconnect.php';
 					
 				</ul>
 			</div>
-			<div class="product_list_header">  
+			<!-- <div class="product_list_header">  
 					<a href="cart.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
 					 </a>
-			</div>
+			</div> -->
 			<div class="clearfix"> </div>
 		</div>
 	</div>

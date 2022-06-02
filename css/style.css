@@ -649,7 +649,7 @@ i.gray-star {
   height: 32px;
   border: none;
   text-indent: 100%;
-  background: url(../images/arrowin.png) no-repeat 0px 0px;
+  background: url(../images/harrow.png) no-repeat 0px 0px;
 }
 #toTopHover {
   width: 32px;
@@ -3565,7 +3565,7 @@ h3.agileits-icons-title {
   }
   .column {
     float: left;
-    /* width: 80%; */
+    width: 80%;
     padding: 0 10px;
   }
   
