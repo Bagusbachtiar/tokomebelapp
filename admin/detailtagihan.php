@@ -2,54 +2,55 @@
 	session_start();
 	include '../dbconnect.php';
 
-    if(isset($_POST["addtagihan"])) {
-		$idkategori=$_POST['idkategori'];
-		$jumlah=$_POST['jumlah'];
-		$hargasatuan=$_POST['hargasatuan'];
+    // if(isset($_POST["edit"])) {
+	// 	$idkategori=$_POST['idkategori'];
+	// 	$jumlah=$_POST['jumlah'];
+	// 	$hargasatuan=$_POST['hargasatuan'];
 		
-		$nama_file = $_FILES['uploadgambar']['name'];
-		$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
-		$random = crypt($nama_file, time());
-		$ukuran_file = $_FILES['uploadgambar']['size'];
-		$tipe_file = $_FILES['uploadgambar']['type'];
-		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		$path = "../viewtagihan/".$random.'.'.$ext;
-		$pathdb = "viewtagihan/".$random.'.'.$ext;
+		// $nama_file = $_FILES['uploadgambar']['name'];
+		// $ext = pathinfo($nama_file, PATHINFO_EXTENSION);
+		// $random = crypt($nama_file, time());
+		// $ukuran_file = $_FILES['uploadgambar']['size'];
+		// $tipe_file = $_FILES['uploadgambar']['type'];
+		// $tmp_file = $_FILES['uploadgambar']['tmp_name'];
+		// $path = "../viewtagihan/".$random.'.'.$ext;
+		// $pathdb = "viewtagihan/".$random.'.'.$ext;
 
-		if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
-		  if($ukuran_file <= 5000000){ 
-			if(move_uploaded_file($tmp_file, $path)){ 
+		// if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
+		//   if($ukuran_file <= 5000000){ 
+		// 	if(move_uploaded_file($tmp_file, $path)){ 
 			
-			  $query = "insert into detailtagihan (idkategori, gambar, deskripsi, jumlah, hargasatuan)
-			  values('$idkategori', '$pathdb', '$deskripsi', '$jumlah','$hargasatuan')";
-			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
+			//   $query = "update into detailtagihan (idkategori, gambar, deskripsi, jumlah, hargasatuan)
+			//   values('$idkategori', '$pathdb', '$deskripsi', '$jumlah','$hargasatuan')";
+
+			//   $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
-			  if($sql){ 
+			//   if($sql){ 
 				
-				echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+			// 	echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
 					
-			  }else{
-				// Jika Gagal, Lakukan :
-				echo "Sorry, there's a problem while submitting.";
-				echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-			  }
-			}else{
-			  // Jika gambar gagal diupload, Lakukan :
-			  echo "Sorry, there's a problem while uploading the file.";
-			  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-			}
-		  }else{
-			// Jika ukuran file lebih dari 1MB, lakukan :
-			echo "Sorry, the file size is not allowed to more than 1mb";
-			echo "<br><meta http-equiv='refresh' content='5; URL=vieewtagihan.php'> You will be redirected to the form in 5 seconds";
-		  }
-		}else{
-		  // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
-		  echo "Sorry, the image format should be JPG/PNG.";
-		  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-		}
+			//   }else{
+			// 	// Jika Gagal, Lakukan :
+			// 	echo "Sorry, there's a problem while submitting.";
+			// 	echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+			//   }
+		// 	}else{
+		// 	  // Jika gambar gagal diupload, Lakukan :
+		// 	  echo "Sorry, there's a problem while uploading the file.";
+		// 	  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+		// 	}
+		//   }else{
+		// 	// Jika ukuran file lebih dari 1MB, lakukan :
+		// 	echo "Sorry, the file size is not allowed to more than 1mb";
+		// 	echo "<br><meta http-equiv='refresh' content='5; URL=vieewtagihan.php'> You will be redirected to the form in 5 seconds";
+		//   }
+		// }else{
+		//   // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
+		//   echo "Sorry, the image format should be JPG/PNG.";
+		//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+		// }
 	
-	};
+	// };
 	?>
 
 <!doctype html>
@@ -165,7 +166,7 @@
                            <div class="card-body">
                                <div class="d-sm-flex justify-content-between align-items-center">
                                    <h2>Detail Tagihan</h2>
-                                   <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Sales</button>
+                                   <!-- <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Sales</button> -->
                                </div>
                                    <div class="data-tables datatable-dark">
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
@@ -203,7 +204,7 @@
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                        <a href="viewtagihan.php?op=edit=<?php ['id']?>"><button type="button" class="btn btn-warning">Edit</button></a>
+                                                        <a href="detailtagihan.php?op=edit=<?php ['id']?>"><button type="button" class="btn btn-warning">Edit</button></a>
                                                    
                                                         </td>
                                               </tr>
