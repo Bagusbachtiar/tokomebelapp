@@ -196,7 +196,7 @@
 												<th>Nama sales</th>
 												<th>Merk</th>
 												<th>Tanggal</th>
-                                                <th>Jumlah Produk</th>
+                                                <th>Jumlah Tagihan</th>
                                                 
                                                 
                                                 <!-- <a href="index.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a> -->
