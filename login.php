@@ -191,8 +191,8 @@ $timenow = date("j-F-Y-h:i:s A");
 					<input type="submit" name="login" value="Masuk">
 				</form>
 			</div>
-			<h4>Belum terdaftar?</h4>
-			<p><a href="registered.php">Daftar Sekarang</a></p>
+			<!-- <h4>Belum terdaftar?</h4>
+			<p><a href="registered.php">Daftar Sekarang</a></p> -->
 		</div>
 	</div>
 <!-- //login -->
