@@ -166,7 +166,7 @@
                            <div class="card-body">
                                <div class="d-sm-flex justify-content-between align-items-center">
                                    <h2>Detail Tagihan</h2>
-                                   <!-- <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Sales</button> -->
+                                   
                                </div>
                                    <div class="data-tables datatable-dark">
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
@@ -204,7 +204,7 @@
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                        <a href="detailtagihan.php?op=edit=<?php ['id']?>"><button type="button" class="btn btn-warning">Edit</button></a>
+                                                  <a href="" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal<?php echo $idtag ?>">Edit</a>
                                                    
                                                         </td>
                                               </tr>
@@ -237,65 +237,44 @@
     <!-- page container area end -->
 	
 	<!-- modal input -->
-    <div id="myModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">Tambah Produk</h4>
-						</div>
-						
-						<div class="modal-body">
-						<form action="viewtagihan.php" method="post" enctype="multipart/form-data" >
-								<!-- <div class="form-group">
-									<label>Nama Produk</label>
-									<input name="namaproduk" type="text" class="form-control" required autofocus>
-								</div> -->
-								<div class="form-group">
-									<label>Nama Kategori</label>
-									<select name="idkategori" class="form-control">
-									<option selected>Pilih Kategori</option>
-									<?php
-									$det=mysqli_query($conn,"select * from kategori order by namakategori ASC")or die(mysqli_error());
-									while($d=mysqli_fetch_array($det)){
-									?>
-										<option value="<?php echo $d['idkategori'] ?>"><?php echo $d['namakategori'] ?></option>
-										<?php
-								}
-								?>		
-									</select>
-									
-								</div>
-								<!-- <div class="form-group">
-									<label>Deskripsi</label>
-									<input name="deskripsi" type="text" class="form-control" required>
-								</div> -->
-								<!-- <div class="form-group">
-									<label>Rating (1-5)</label>
-									<input name="rate" type="number" class="form-control"  min="1" max="5" required>
-								</div> -->
-								<div class="form-group">
-									<label>Jumlah</label>
-									<input name="jumlah" type="number" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>Harga Satuan</label>
-									<input name="hargasatuan" type="number" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>Gambar</label>
-									<input name="uploadgambar" type="file" class="form-control">
-								</div>
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-								<input name="addtagihan" type="submit" class="btn btn-primary" value="Tambah">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-	
+    <div class="modal fade" id="modal<?php echo $idtag ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Barang</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- di dalam modal-body terdapat 4 form input yang berisi data.
+                    data-data tersebut ditampilkan sama seperti menampilkan data pada tabel. -->
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Jumlah</label>
+                                <input type="text" class="form-control" value="<?php echo $p['jumlah']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Harga Satuan</label>
+                                <textarea class="form-control" rows="5"><?php echo $p['hargasatuan']; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Kategori</label>
+                                <input type="text" class="form-control" value="<?php echo $p['idkategori']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">expirationdate</label>
+                                <input type="text" class="form-control" value="<?php echo $p['expirationdate']; ?>">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 	<script>
 	$(document).ready(function() {
     $('#dataTable3').DataTable( {
