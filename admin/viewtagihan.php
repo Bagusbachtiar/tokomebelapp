@@ -26,10 +26,10 @@
 		// 	if(move_uploaded_file($tmp_file, $path)){ 
             
                 
-            
-            
+            $idsales=$_GET['idsal'];
             // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-			  $query = "insert into tagihan ( expirationdate) values ($expirationdate) where idsal = $idsales";
+			  $query = "INSERT INTO tagihan (expirationdate) values ($expirationdate) WHERE idsales ='$idsales'";
+              var_dump($query);
             
 
             // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
