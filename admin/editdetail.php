@@ -2,14 +2,10 @@
 	session_start();
 	include '../dbconnect.php';
 
-    
-
-    if(isset($_POST["addtagihan"]))
-    
-     {
-       
-        
-        $expirationdate=$_POST['expirationdate'];
+    // if(isset($_POST["edit"])) {
+	// 	$idkategori=$_POST['idkategori'];
+	// 	$jumlah=$_POST['jumlah'];
+	// 	$hargasatuan=$_POST['hargasatuan'];
 		
 		// $nama_file = $_FILES['uploadgambar']['name'];
 		// $ext = pathinfo($nama_file, PATHINFO_EXTENSION);
@@ -20,37 +16,29 @@
 		// $path = "../viewtagihan/".$random.'.'.$ext;
 		// $pathdb = "viewtagihan/".$random.'.'.$ext;
 
-
 		// if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
 		//   if($ukuran_file <= 5000000){ 
 		// 	if(move_uploaded_file($tmp_file, $path)){ 
-            
-                
-            $idsales=(int)$_POST['id'];
-            
-            // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-			  $query = "insert into tagihan (idsales,expirationdate) values ('$idsales','$expirationdate') ";
-              var_dump($query);
-            
+			
+			//   $query = "update into detailtagihan (idkategori, gambar, deskripsi, jumlah, hargasatuan)
+			//   values('$idkategori', '$pathdb', '$deskripsi', '$jumlah','$hargasatuan')";
 
-            // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
-            
-			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
+			//   $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
 			  
-			  if($sql){ 
+			//   if($sql){ 
 				
-				echo "<br><meta http-equiv='refresh' content='0; URL=viewtagihan.php?idsal=$idsales'> You will be redirected to the form in 5 seconds";
+			// 	echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
 					
-			  }else{
-				// Jika Gagal, Lakukan :
-				echo "Sorry, there's a problem while submitting.";
-				echo "<br><meta http-equiv='refresh' content='0; URL=viewtagihan.php?idsal=$idsales'> You will be redirected to the form in 5 seconds";
-			  }
-			// }else{
-			//   // Jika gambar gagal diupload, Lakukan :
-			//   echo "Sorry, there's a problem while uploading the file.";
-			//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-			// }
+			//   }else{
+			// 	// Jika Gagal, Lakukan :
+			// 	echo "Sorry, there's a problem while submitting.";
+			// 	echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+			//   }
+		// 	}else{
+		// 	  // Jika gambar gagal diupload, Lakukan :
+		// 	  echo "Sorry, there's a problem while uploading the file.";
+		// 	  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
+		// 	}
 		//   }else{
 		// 	// Jika ukuran file lebih dari 1MB, lakukan :
 		// 	echo "Sorry, the file size is not allowed to more than 1mb";
@@ -62,7 +50,7 @@
 		//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
 		// }
 	
-	};
+	// };
 	?>
 
 <!doctype html>
@@ -177,18 +165,19 @@
                        <div class="card">
                            <div class="card-body">
                                <div class="d-sm-flex justify-content-between align-items-center">
-                                   <h2>Daftar Tagihan</h2>
-                                   <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2">Tambah Tagihan</button>
+                                   <h2>Detail Tagihan</h2>
+                                   
                                </div>
                                    <div class="data-tables datatable-dark">
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
                                         <tr>
                                                
-                                               <!-- <th>Gambar</th> -->
-                                               <th>TotalTagihan</th>
-                                               <th>Dibuat</th>
-                                               <th>jatuh tempo</th>
-                                               <th></th>
+                                               <th>jumlah</th>
+                                               <th>harga satuan</th>
+                                               <th>kategori</th>
+                                               <th>Tanggal Dibuat</th>
+                                               <th>Tanggal Jatuh Tempo</th>
+
                                         
                                                
 
@@ -198,22 +187,24 @@
                                            
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
-                                           $idsales=$_GET['idsal'];
-                                           $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
+                                           $idtag=$_GET['idtagihan'];
+                                           $sal=mysqli_query($conn,"SELECT A.expirationdate, B.jumlah, B.hargasatuan, B.idkategori, B.createdat FROM tagihan A  INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
                                                ?>
                                                <tr>
                                                <!-- <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td> -->
-                                               <td><?php echo $p['totaltagihan'] ?></td>
+                                               <td><?php echo $p['jumlah'] ?></td>
+                                               <td><?php echo $p['hargasatuan'] ?></td>
+                                               <td><?php echo $p['idkategori'] ?></td>
                                                <td><?php echo $p['createdat'] ?></td>
                                                <td><?php echo $p['expirationdate'] ?></td>
 
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                        <a href="detailtagihan.php?op=edit&idtagihan=<?php echo $p['idtagihan'] ?>"><button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
+                                                  <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal<?php echo $idtag ?>">Edit</a>
                                                    
                                                         </td>
                                               </tr>
@@ -246,49 +237,44 @@
     <!-- page container area end -->
 	
 	<!-- modal input -->
-    <div id="myModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">Tambah Tagihan</h4>
-						</div>
-						
-						<div class="modal-body">
-						<form action="viewtagihan.php" method="post" enctype="multipart/form-data" >
-                        <div class="form-group">
-									<input name="id" type="text" class="form-control d-none" required value='<?php echo $_GET['idsal'] ?>'>
-								</div>
-								<!-- <div class="form-group">
-									<label>Deskripsi</label>
-									<input name="deskripsi" type="text" class="form-control" required>
-								</div> -->
-								<!-- <div class="form-group">
-									<label>Rating (1-5)</label>
-									<input name="rate" type="number" class="form-control"  min="1" max="5" required>
-								</div> -->
-								<!-- <div class="form-group">
-									<label>Jumlah</label>
-									<input name="jumlah" type="number" class="form-control">
-								</div> -->
-								<div class="form-group">
-									<label>Jatuh Tempo</label>
-									<input name="expirationdate" type="date" class="form-control" required>
-								</div>
-								<!-- <div class="form-group">
-									<label>Gambar</label>
-									<input name="uploadgambar" type="file" class="form-control">
-								</div> -->
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-								<input name="addtagihan" type="submit" class="btn btn-primary" value="Tambah">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-	
+    <div class="modal fade" id="modal<?php echo $idtag ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Barang</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- di dalam modal-body terdapat 4 form input yang berisi data.
+                    data-data tersebut ditampilkan sama seperti menampilkan data pada tabel. -->
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Jumlah</label>
+                                <input type="text" class="form-control" value="<?php echo $p['jumlah']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Harga Satuan</label>
+                                <textarea class="form-control" rows="5"><?php echo $p['hargasatuan']; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Kategori</label>
+                                <input type="text" class="form-control" value="<?php echo $p['idkategori']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">expirationdate</label>
+                                <input type="text" class="form-control" value="<?php echo $p['expirationdate']; ?>">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 	<script>
 	$(document).ready(function() {
     $('#dataTable3').DataTable( {

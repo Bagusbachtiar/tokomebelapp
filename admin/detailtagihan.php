@@ -204,7 +204,7 @@
                                                   <?php
                                                   // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
                                                   <td scope="row">
-                                                  <a href="" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal<?php echo $idtag ?>">Edit</a>
+                                                         <a href="viewtagihan.php?idsal=<?php echo $p['idsales'] ?>" button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
                                                    
                                                         </td>
                                               </tr>
