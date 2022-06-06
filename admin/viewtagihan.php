@@ -10,7 +10,7 @@
        
         
         $expirationdate=$_POST['expirationdate'];
-		
+		$totaltagihan=$_POST['totaltagihan'];
 		// $nama_file = $_FILES['uploadgambar']['name'];
 		// $ext = pathinfo($nama_file, PATHINFO_EXTENSION);
 		// $random = crypt($nama_file, time());
@@ -266,10 +266,10 @@
 									<label>Rating (1-5)</label>
 									<input name="rate" type="number" class="form-control"  min="1" max="5" required>
 								</div> -->
-								<!-- <div class="form-group">
-									<label>Jumlah</label>
-									<input name="jumlah" type="number" class="form-control">
-								</div> -->
+								<div class="form-group">
+									<label>Total Tagihan</label>
+									<input name="totaltagihan" type="number" class="form-control">
+								</div>
 								<div class="form-group">
 									<label>Jatuh Tempo</label>
 									<input name="expirationdate" type="date" class="form-control" required>

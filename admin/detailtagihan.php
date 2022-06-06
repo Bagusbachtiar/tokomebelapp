@@ -201,11 +201,9 @@
                                                <td><?php echo $p['createdat'] ?></td>
                                                <td><?php echo $p['expirationdate'] ?></td>
 
-                                                  <?php
-                                                  // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
+                                                
                                                   <td scope="row">
-                                                         <a href="viewtagihan.php?idsal=<?php echo $p['idsales'] ?>" button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
-                                                   
+                                                  <a href="update.php?op=edit&idtagihan=<?php echo $idtag ?>" button type="button" class="btn btn-warning">Edit</button></a>
                                                         </td>
                                               </tr>
                                                 
@@ -237,44 +235,6 @@
     <!-- page container area end -->
 	
 	<!-- modal input -->
-    <div class="modal fade" id="modal<?php echo $idtag ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Barang</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!-- di dalam modal-body terdapat 4 form input yang berisi data.
-                    data-data tersebut ditampilkan sama seperti menampilkan data pada tabel. -->
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Jumlah</label>
-                                <input type="text" class="form-control" value="<?php echo $p['jumlah']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Harga Satuan</label>
-                                <textarea class="form-control" rows="5"><?php echo $p['hargasatuan']; ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Kategori</label>
-                                <input type="text" class="form-control" value="<?php echo $p['idkategori']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">expirationdate</label>
-                                <input type="text" class="form-control" value="<?php echo $p['expirationdate']; ?>">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 	<script>
 	$(document).ready(function() {
     $('#dataTable3').DataTable( {

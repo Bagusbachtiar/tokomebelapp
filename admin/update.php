@@ -1,56 +1,32 @@
 <?php 
 	session_start();
 	include '../dbconnect.php';
+    
+    $id = $_POST['id'];
+    $jumlah = $_POST['jumlah'];
+    $hargasatuan = $_POST['hargasatuan'];
+    $idkategori = $_POST['idkategori'];
+    $createdat = $_POST['createdat'];
+    $expirationdate = $_POST['expirationdate'];
+    
 
-    // if(isset($_POST["edit"])) {
-	// 	$idkategori=$_POST['idkategori'];
-	// 	$jumlah=$_POST['jumlah'];
-	// 	$hargasatuan=$_POST['hargasatuan'];
-		
-		// $nama_file = $_FILES['uploadgambar']['name'];
-		// $ext = pathinfo($nama_file, PATHINFO_EXTENSION);
-		// $random = crypt($nama_file, time());
-		// $ukuran_file = $_FILES['uploadgambar']['size'];
-		// $tipe_file = $_FILES['uploadgambar']['type'];
-		// $tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		// $path = "../viewtagihan/".$random.'.'.$ext;
-		// $pathdb = "viewtagihan/".$random.'.'.$ext;
 
-		// if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
-		//   if($ukuran_file <= 5000000){ 
-		// 	if(move_uploaded_file($tmp_file, $path)){ 
-			
-			//   $query = "update into detailtagihan (idkategori, gambar, deskripsi, jumlah, hargasatuan)
-			//   values('$idkategori', '$pathdb', '$deskripsi', '$jumlah','$hargasatuan')";
+    $query = "UPDATE detailtagihan SET jumlah='$jumlah',hargasatuan='$hargasatuan',alamaidkategori='$idkategori',createdat='$createdat',expirationdate='$expirationdate' WHERE id = $id";
+    $result = mysqli_query($con, $query);
 
-			//   $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
-			  
-			//   if($sql){ 
-				
-			// 	echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-					
-			//   }else{
-			// 	// Jika Gagal, Lakukan :
-			// 	echo "Sorry, there's a problem while submitting.";
-			// 	echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-			//   }
-		// 	}else{
-		// 	  // Jika gambar gagal diupload, Lakukan :
-		// 	  echo "Sorry, there's a problem while uploading the file.";
-		// 	  echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-		// 	}
-		//   }else{
-		// 	// Jika ukuran file lebih dari 1MB, lakukan :
-		// 	echo "Sorry, the file size is not allowed to more than 1mb";
-		// 	echo "<br><meta http-equiv='refresh' content='5; URL=vieewtagihan.php'> You will be redirected to the form in 5 seconds";
-		//   }
-		// }else{
-		//   // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
-		//   echo "Sorry, the image format should be JPG/PNG.";
-		//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-		// }
-	
-	// };
+    if ($result) { ?>
+    <script>
+      alert('Data berhasil diubah!')
+      location.href = 'detailtagihan.php'
+    </script>
+    <?php
+    } else { ?>
+    <script>
+    alert('Data Gagal diubah!')
+    location.href = 'detailtagihan.php'
+     </script>
+    <?php } ?>
+    
 	?>
 
 <!doctype html>
@@ -186,23 +162,28 @@
 
                                            
                                            <?php 
-                                          
-                                           $idtag=$_GET['edit'];
-                                           $sal=mysqli_query($conn,"SELECT A.expirationdate, A.idtagihan, B.jumlah, B.hargasatuan, B.idkategori, B.createdat FROM tagihan A  INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
+                                           // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
+                                           $idtag=$_GET['idtagihan'];
+                                           $sal=mysqli_query($conn,"SELECT A.expirationdate, B.jumlah, B.hargasatuan, B.idkategori, B.createdat FROM tagihan A  INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
                                                ?>
-                                            <tr>
-                                               <td><?php echo $p['idtagihan'] ?></td>
+                                               <tr>
+                                               <!-- <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td> -->
                                                <td><?php echo $p['jumlah'] ?></td>
                                                <td><?php echo $p['hargasatuan'] ?></td>
                                                <td><?php echo $p['idkategori'] ?></td>
                                                <td><?php echo $p['createdat'] ?></td>
                                                <td><?php echo $p['expirationdate'] ?></td>
+
+                                                
+                                                  <td scope="row">
+                                                  <a href="" button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
+                                                        </td>
                                               </tr>
                                                 
-                                     <?php } ?>
+                                               <?php } ?>
 
 
                                        </tbody>
@@ -230,44 +211,7 @@
     <!-- page container area end -->
 	
 	<!-- modal input -->
-    <div class="modal fade" id="modal<?php echo $idtag ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Barang</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!-- di dalam modal-body terdapat 4 form input yang berisi data.
-                    data-data tersebut ditampilkan sama seperti menampilkan data pada tabel. -->
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Jumlah</label>
-                                <input type="text" class="form-control" value="<?php echo $p['jumlah']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Harga Satuan</label>
-                                <textarea class="form-control" rows="5"><?php echo $p['hargasatuan']; ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Kategori</label>
-                                <input type="text" class="form-control" value="<?php echo $p['idkategori']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">expirationdate</label>
-                                <input type="text" class="form-control" value="<?php echo $p['expirationdate']; ?>">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
 	<script>
 	$(document).ready(function() {
     $('#dataTable3').DataTable( {
