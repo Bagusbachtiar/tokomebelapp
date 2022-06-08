@@ -29,7 +29,7 @@
             $idsales=(int)$_POST['id'];
             
             // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-			  $query = "insert into tagihan (idsales,expirationdate) values ('$idsales','$expirationdate') ";
+			  $query = "insert into tagihan (idsales,totaltagihan,expirationdate) values ('$idsales','$totaltagihan','$expirationdate') ";
               var_dump($query);
             
 

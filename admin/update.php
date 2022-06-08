@@ -148,22 +148,19 @@
             <input type="text" name="hargasatuan" class="form-control" value="<?= $row['hargasatuan'] ?>">
           </div>
           <div class="form-group">
-									<label>Nama Kategori</label>
-									<select name="idkategori" class="form-control">
-									<option selected>Pilih Kategori</option>
+									<label>Nama Produk</label>
+									<select name="idproduk" class="form-control">
+									<option selected>Pilih Produk</option>
 									<?php
-									$det=mysqli_query($conn,"select * from kategori order by namakategori ASC")or die(mysqli_error());
+									$det=mysqli_query($conn,"select * from produk order by namaproduk ASC")or die(mysqli_error());
 									while($d=mysqli_fetch_array($det)){
 									?>
-										<option value="<?php echo $d['idkategori'] ?>"><?php echo $d['namakategori'] ?></option>
+										<option <?= $d['idproduk'] == $row['idproduk'] ? 'selected' : '' ?> value="<?php echo $d['idproduk'] ?>"><?php echo $d['namaproduk'] ?></option>
 										<?php
 								}
 								?>		
 									</select>
-          <div class="form-group">
-            <label for="">createdat</label>
-            <input type="text" name="createdat" class="form-control" value="<?= $row['createdat'] ?>">
-          </div>
+          
           <!-- <div class="form-group">
             <label for="">expiration date</label>
             <input type="date" name="expirationdate" class="form-control" value="<?= $row['expirationdate'] ?>">

@@ -166,6 +166,8 @@
                            <div class="card-body">
                                <div class="d-sm-flex justify-content-between align-items-center">
                                    <h2>Detail Tagihan</h2>
+
+                                
                                    
                                </div>
                                    <div class="data-tables datatable-dark">
@@ -174,9 +176,9 @@
                                                
                                                <th>jumlah</th>
                                                <th>harga satuan</th>
-                                               <th>kategori</th>
-                                               <th>Tanggal Dibuat</th>
-                                               <th>Tanggal Jatuh Tempo</th>
+                                               <th>Nama Produk</th>
+                                               <th>Nama Kategori</th>
+                                               
 
                                         
                                                
@@ -188,7 +190,14 @@
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
                                            $idtag=$_GET['idtagihan'];
-                                           $sal=mysqli_query($conn,"SELECT A.expirationdate, B.jumlah, B.hargasatuan, B.idkategori, B.createdat FROM tagihan A  INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
+                                        //    $sal=mysqli_query($conn,"SELECT A.expirationdate, B.jumlah, B.hargasatuan, B.createdat FROM tagihan A 
+                                        //     INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
+
+                                        $sal=mysqli_query($conn,"SELECT D.jumlah, D.hargasatuan, P.namaproduk, K.namakategori FROM detailtagihan D 
+                                        INNER JOIN produk P ON D.idproduk = P.idproduk 
+                                        INNER JOIN kategori K ON P.idkategori = K.idkategori
+                                        WHERE idtagihan = $idtag; ");
+                                    
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
@@ -197,9 +206,8 @@
                                                <!-- <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td> -->
                                                <td><?php echo $p['jumlah'] ?></td>
                                                <td><?php echo $p['hargasatuan'] ?></td>
-                                               <td><?php echo $p['idkategori'] ?></td>
-                                               <td><?php echo $p['createdat'] ?></td>
-                                               <td><?php echo $p['expirationdate'] ?></td>
+                                               <td><?php echo $p['namaproduk'] ?></td>
+                                               <td><?php echo $p['namakategori'] ?></td>
 
                                                 
                                                   <td scope="row">

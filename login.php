@@ -100,8 +100,8 @@ $timenow = date("j-F-Y-h:i:s A");
 	<div class="logo_products">
 		<div class="container">
 		<div class="w3ls_logo_products_left1">
-				<ul class="phone_email">
-					<li><i class="fa fa-phone" aria-hidden="true"></i>Hubungi Kami : (+6281) 222 333</li>
+		<ul class="phone_email">
+					<li><a href="https://api.whatsapp.com/send?phone=6281249138361" class="fa fa-phone" aria-hidden="true"></a></li> <i>hubungi kami</i> 
 				</ul>
 			</div>
 			<div class="w3ls_logo_products_left">
