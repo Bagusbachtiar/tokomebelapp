@@ -226,8 +226,15 @@ button.w3view-cart:focus {
   width: 33.33%;
 }
 .w3ls_logo_products_left1 ul.phone_email li {
+  width: 32px;
+  height: 32px;
+  color: rgb(18, 251, 10);
+  border: 2px solid rgb(1, 255, 22);
+  text-align: center;
   display: inline-block;
-  color: #212121;
+  font-size: 19px;
+  line-height: 30px;
+  border-radius: 50%;
 }
 /*-- //header --*/
 .navbar-default .navbar-nav > li > a {

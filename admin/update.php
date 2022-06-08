@@ -2,31 +2,20 @@
 	session_start();
 	include '../dbconnect.php';
     
-    $id = $_POST['id'];
-    $jumlah = $_POST['jumlah'];
-    $hargasatuan = $_POST['hargasatuan'];
-    $idkategori = $_POST['idkategori'];
-    $createdat = $_POST['createdat'];
-    $expirationdate = $_POST['expirationdate'];
+//     if(isset($_POST["update"])) {
+
+//     $id = $_POST['id'];
+//     $jumlah = $_POST['jumlah'];
+//     $hargasatuan = $_POST['hargasatuan'];
+//     $idkategori = $_POST['idkategori'];
+//     $createdat = $_POST['createdat'];
+//     $expirationdate = $_POST['expirationdate'];
     
 
+//     $query = "UPDATE detailtagihan SET (id, jumlah, hargasatuan, idkategori, createdat, expirationdate) values ('$id','$jumlah','$hargasatuan','$idkategori','$createdat','$expirationdate') WHERE id = $id";
+//     $result = mysqli_query($conn, $query);
 
-    $query = "UPDATE detailtagihan SET jumlah='$jumlah',hargasatuan='$hargasatuan',alamaidkategori='$idkategori',createdat='$createdat',expirationdate='$expirationdate' WHERE id = $id";
-    $result = mysqli_query($con, $query);
-
-    if ($result) { ?>
-    <script>
-      alert('Data berhasil diubah!')
-      location.href = 'detailtagihan.php'
-    </script>
-    <?php
-    } else { ?>
-    <script>
-    alert('Data Gagal diubah!')
-    location.href = 'detailtagihan.php'
-     </script>
-    <?php } ?>
-    
+// };
 	?>
 
 <!doctype html>
@@ -136,64 +125,61 @@
           <div class="main-content-inner">
                
                <!-- market value area start -->
-               <div class="row mt-5 mb-5">
-                   <div class="col-12">
-                       <div class="card">
-                           <div class="card-body">
-                               <div class="d-sm-flex justify-content-between align-items-center">
-                                   <h2>Detail Tagihan</h2>
-                                   
-                               </div>
-                                   <div class="data-tables datatable-dark">
-                                        <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
-                                        <tr>
-                                               
-                                               <th>jumlah</th>
-                                               <th>harga satuan</th>
-                                               <th>kategori</th>
-                                               <th>Tanggal Dibuat</th>
-                                               <th>Tanggal Jatuh Tempo</th>
+    <!-- page container area end -->
+	<div class="container mt-5">
+  <div class="card im-box">
+    <h5 class="card-header">Udah Data Mahasiswa</h5>
+    <div class="card-body">
+      <h5 class="card-title">Form Edit Mahasiswa</h5>
 
-                                        
-                                               
+      <?php
+      $id = $_GET['idtagihan'];
+      $data = mysqli_query($conn, "SELECT * FROM detailtagihan WHERE id = $id");
+      foreach ($data as $row) : ?>
 
-                                           </tr></thead><tbody>
-                                               
+        <form action="proses_edit.php" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="id" class="form-control" value="<?= $row['id'] ?>">
+          <div class="form-group">
+            <label for="">Jumlah</label>
+            <input type="text" name="jumlah" class="form-control" value="<?= $row['jumlah'] ?>">
+          </div>
+          <div class="form-group">
+            <label for="">Harga Satuan</label>
+            <input type="text" name="hargasatuan" class="form-control" value="<?= $row['hargasatuan'] ?>">
+          </div>
+          <div class="form-group">
+									<label>Nama Kategori</label>
+									<select name="idkategori" class="form-control">
+									<option selected>Pilih Kategori</option>
+									<?php
+									$det=mysqli_query($conn,"select * from kategori order by namakategori ASC")or die(mysqli_error());
+									while($d=mysqli_fetch_array($det)){
+									?>
+										<option value="<?php echo $d['idkategori'] ?>"><?php echo $d['namakategori'] ?></option>
+										<?php
+								}
+								?>		
+									</select>
+          <div class="form-group">
+            <label for="">createdat</label>
+            <input type="text" name="createdat" class="form-control" value="<?= $row['createdat'] ?>">
+          </div>
+          <!-- <div class="form-group">
+            <label for="">expiration date</label>
+            <input type="date" name="expirationdate" class="form-control" value="<?= $row['expirationdate'] ?>">
+          </div> -->
+          <div class="form-group">
+            <button type="reset" class="btn btn-danger ">Close</button>
+            <input name="submit" type="submit" class="btn btn-primary" value="Update">
+          </div>
+        </form>
+      <?php endforeach; ?>
 
-                                           
-                                           <?php 
-                                           // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
-                                           $idtag=$_GET['idtagihan'];
-                                           $sal=mysqli_query($conn,"SELECT A.expirationdate, B.jumlah, B.hargasatuan, B.idkategori, B.createdat FROM tagihan A  INNER JOIN detailtagihan B ON A.idtagihan = B.idtagihan WHERE A.idtagihan = $idtag;"); 
-                                           while($p=mysqli_fetch_array($sal))
-                                           {
-                                               
-                                               ?>
-                                               <tr>
-                                               <!-- <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td> -->
-                                               <td><?php echo $p['jumlah'] ?></td>
-                                               <td><?php echo $p['hargasatuan'] ?></td>
-                                               <td><?php echo $p['idkategori'] ?></td>
-                                               <td><?php echo $p['createdat'] ?></td>
-                                               <td><?php echo $p['expirationdate'] ?></td>
-
-                                                
-                                                  <td scope="row">
-                                                  <a href="" button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
-                                                        </td>
-                                              </tr>
-                                                
-                                               <?php } ?>
+    </div>
+  </div>
+</div>
 
 
-                                       </tbody>
-                                       </table>
-                                   </div>
-                                </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
              
                
                <!-- row area start-->
@@ -208,8 +194,7 @@
         </footer>
         <!-- footer area end-->
     </div>
-    <!-- page container area end -->
-	
+
 	<!-- modal input -->
     
 	<script>

@@ -87,9 +87,11 @@ include 'dbconnect.php';
 	<div class="logo_products">
 		<div class="container">
 		<div class="w3ls_logo_products_left1">
-				<ul class="phone_email">
-					<li><i class="fa fa-phone" aria-hidden="true"></i>Hubungi Kami : (+6281) 222 333</li>
+		
+		<ul class="phone_email">
+					<li><a href="https://api.whatsapp.com/send?phone=6281249138361" class="fa fa-phone" aria-hidden="true"></a></li> <i>hubungi kami</i> 
 				</ul>
+			
 			</div>
 			<div class="w3ls_logo_products_left">
 				<h1><a href="index.php">Toko Mebel Rizki</a></h1>
@@ -326,7 +328,7 @@ include 'dbconnect.php';
 					<ul>
 						<li><a href="#" class="w3_agile_instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 						<li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a href="https://api.whatsapp.com/send?phone=6281249138361" class="agile_twitter"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 				<div class="payment-w3ls">	
