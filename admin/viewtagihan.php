@@ -4,38 +4,32 @@
 
     
 
-    if(isset($_POST["addtagihan"]))
+    if(isset($_POST["submit"]))
     
      {
        
-        
+        $jumlah=$_POST['jumlah'];
         $expirationdate=$_POST['expirationdate'];
-		$totaltagihan=$_POST['totaltagihan'];
-		// $nama_file = $_FILES['uploadgambar']['name'];
-		// $ext = pathinfo($nama_file, PATHINFO_EXTENSION);
-		// $random = crypt($nama_file, time());
-		// $ukuran_file = $_FILES['uploadgambar']['size'];
-		// $tipe_file = $_FILES['uploadgambar']['type'];
-		// $tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		// $path = "../viewtagihan/".$random.'.'.$ext;
-		// $pathdb = "viewtagihan/".$random.'.'.$ext;
+        $hargasatuan=$_POST['hargasatuan'];
+        $idproduk=$_POST['idproduk'];
+		
 
+        if(!empty($nameArr)){
+            for($i = 0; $i < count($nameArr); $i++){
+                if(!empty($nameArr[$i])){
+                    $jumlah = $jumlahArr[$i];
+                    $expirationdate = $expirationdateArr[$i];
+                    $hargasatuan = $hargasatuanArr[$i];
+                    
 
-		// if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
-		//   if($ukuran_file <= 5000000){ 
-		// 	if(move_uploaded_file($tmp_file, $path)){ 
-            
-                
             $idsales=(int)$_POST['id'];
-            
-            // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-			  $query = "insert into tagihan (idsales,totaltagihan,expirationdate) values ('$idsales','$totaltagihan','$expirationdate') ";
-              var_dump($query);
-            
+			//   $query = "insert into tagihan (idsales,totaltagihan,expirationdate) values ('$idsales','$totaltagihan','$expirationdate') ";
 
-            // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
+			  $query = "insert into tagihan (idsales,expirationdate) values ('$idsales','$expirationdate') ";
+              $query2 = "insert into detailtagihan (idsales,jumlah,hargasatuan,idproduk) values ('$idsales','$jumlah','$hargasatuan','$idproduk') ";
+                
             
-			  $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
+			  $sql = mysqli_query($conn, $query, $query2); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			  if($sql){ 
 				
@@ -46,22 +40,9 @@
 				echo "Sorry, there's a problem while submitting.";
 				echo "<br><meta http-equiv='refresh' content='0; URL=viewtagihan.php?idsal=$idsales'> You will be redirected to the form in 5 seconds";
 			  }
-			// }else{
-			//   // Jika gambar gagal diupload, Lakukan :
-			//   echo "Sorry, there's a problem while uploading the file.";
-			//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-			// }
-		//   }else{
-		// 	// Jika ukuran file lebih dari 1MB, lakukan :
-		// 	echo "Sorry, the file size is not allowed to more than 1mb";
-		// 	echo "<br><meta http-equiv='refresh' content='5; URL=vieewtagihan.php'> You will be redirected to the form in 5 seconds";
-		//   }
-		// }else{
-		//   // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
-		//   echo "Sorry, the image format should be JPG/PNG.";
-		//   echo "<br><meta http-equiv='refresh' content='5; URL=viewtagihan.php'> You will be redirected to the form in 5 seconds";
-		// }
-	
+            }
+        }
+     }
 	};
 	?>
 
@@ -86,6 +67,10 @@
 	
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- Bootstrap css library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- Start datatable css -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
@@ -185,8 +170,9 @@
                                         <tr>
                                                
                                                <!-- <th>Gambar</th> -->
-                                               <th>TotalTagihan</th>
-                                               <th>Dibuat</th>
+                                               <th>Jumlah</th>
+                                               <th>Nama Produk</th>
+                                               <th>Harga Satuan</th>
                                                <th>jatuh tempo</th>
                                                <th></th>
                                         
@@ -199,15 +185,18 @@
                                            <?php 
                                            // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
                                            $idsales=$_GET['idsal'];
-                                           $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
+                                           $sal=mysqli_query($conn,"SELECT T.expirationdate, D.jumlah, D.idproduk, D.hargasatuan FROM tagihan T
+                                           INNER JOIN detailtagihan D ON T.idtagihan = D.idtagihan 
+                                           where idsales ='$idsales'"); 
                                            while($p=mysqli_fetch_array($sal))
                                            {
                                                
                                                ?>
                                                <tr>
-                                               <!-- <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td> -->
-                                               <td><?php echo $p['totaltagihan'] ?></td>
-                                               <td><?php echo $p['createdat'] ?></td>
+                                              
+                                               <td><?php echo $p['jumlah'] ?></td>
+                                               <td><?php echo $p['idproduk'] ?></td>
+                                               <td><?php echo $p['hargasatuan'] ?></td>
                                                <td><?php echo $p['expirationdate'] ?></td>
 
                                                   <?php
@@ -254,42 +243,81 @@
 						</div>
 						
 						<div class="modal-body">
-						<form action="viewtagihan.php" method="post" enctype="multipart/form-data" >
-                        <div class="form-group">
-									<input name="id" type="text" class="form-control d-none" required value='<?php echo $_GET['idsal'] ?>'>
-								</div>
-								<!-- <div class="form-group">
-									<label>Deskripsi</label>
-									<input name="deskripsi" type="text" class="form-control" required>
-								</div> -->
-								<!-- <div class="form-group">
-									<label>Rating (1-5)</label>
-									<input name="rate" type="number" class="form-control"  min="1" max="5" required>
-								</div> -->
-								<div class="form-group">
-									<label>Total Tagihan</label>
-									<input name="totaltagihan" type="number" class="form-control">
-								</div>
-								<div class="form-group">
-									<label>Jatuh Tempo</label>
-									<input name="expirationdate" type="date" class="form-control" required>
-								</div>
-								<!-- <div class="form-group">
-									<label>Gambar</label>
-									<input name="uploadgambar" type="file" class="form-control">
-								</div> -->
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-								<input name="addtagihan" type="submit" class="btn btn-primary" value="Tambah">
-							</div>
-						</form>
+						<div class="form-group fieldGroup">
+                        <div class="input-group">
+                        <input type="number" name="jumlah[]" class="form-control" placeholder="Jumlah"/>
+                        <select name="idproduk[]" class="form-control">
+									<option selected>Pilih Produk</option>
+									<?php
+									$det=mysqli_query($conn,"select * from produk order by namaproduk ASC")or die(mysqli_error());
+									while($d=mysqli_fetch_array($det)){
+									?>
+										<option <?= $d['idproduk']?> value="<?php echo $d['idproduk'] ?>"><?php echo $d['namaproduk'] ?></option>
+										<?php
+                                        }?>
+                                    </select>
+                                <input type="text" name="hargasatuan[]" class="form-control" placeholder="Harga Satuan"/>
+                        <input type="date" name="expirationdate[]" class="form-control" placeholder="Jatuh Tempo"/>
+                        <div class="input-group-addon"> 
+                <a href="javascript:void(0)" class="btn btn-success addMore"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</a>
+            </div>
+        </div>
+    </div>
+    
+                         <input type="submit" name="submit" class="btn btn-primary" value="SUBMIT"/>
+					</div>
+				</div>
 					</div>
 				</div>
 			</div>
+
+            	<!-- copy of input fields group -->
+    <div class="form-group fieldGroupCopy" style="display: none;">
+         <div class="input-group">
+             <input type="number" name="jumlah[]" class="form-control" placeholder="Jumlah"/>
+             <select name="idproduk[]" class="form-control">
+									<option selected>Pilih Produk</option>
+									<?php
+									$det=mysqli_query($conn,"select * from produk order by namaproduk ASC")or die(mysqli_error());
+									while($d=mysqli_fetch_array($det)){
+									?>
+										<option <?= $d['idproduk'] ?> value="<?php echo $d['idproduk'] ?>"><?php echo $d['namaproduk'] ?></option>
+										<?php
+							            }?>		
+									</select>             
+             <input type="text" name="hargasatuan[]" class="form-control" placeholder="Harga Satuan"/>
+             <input type="date" name="expirationdate[]" class="form-control" placeholder="Jatuh Tempo"/>
+             <div class="input-group-addon"> 
+                 <a href="javascript:void(0)" class="btn btn-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</a>
+             </div>
+         </div>
+    </div>
+
+    <script>
+$(document).ready(function(){
+    //group add limit
+    var maxGroup = 10;
+    
+    //add more fields group
+    $(".addMore").click(function(){
+        if($('body').find('.fieldGroup').length < maxGroup){
+            var fieldHTML = '<div class="form-group fieldGroup">'+$(".fieldGroupCopy").html()+'</div>';
+            $('body').find('.fieldGroup:last').after(fieldHTML);
+        }else{
+            alert('Maximum '+maxGroup+' groups are allowed.');
+        }
+    });
+    
+    //remove fields group
+    $("body").on("click",".remove",function(){ 
+        $(this).parents(".fieldGroup").remove();
+    });
+});
+</script>
+
+    
 	
-	<script>
+	<!-- <script>
 	$(document).ready(function() {
     $('#dataTable3').DataTable( {
         dom: 'Bfrtip',
@@ -298,7 +326,7 @@
         ]
     } );
 	} );
-	</script>
+	</script> -->
 	
 	<!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

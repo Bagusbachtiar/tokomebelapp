@@ -5,22 +5,23 @@
 	if(isset($_POST["addsales"])) {
 		$namasales=$_POST['namasales'];
         $merk=$_POST['merk'];
+        $nohp=$_POST['nohp'];
 
-        $nama_file = $_FILES['uploadgambar']['name'];
-		$ext = pathinfo($nama_file, PATHINFO_EXTENSION);
-		$random = crypt($nama_file, time());
-		$ukuran_file = $_FILES['uploadgambar']['size'];
-		$tipe_file = $_FILES['uploadgambar']['type'];
-		$tmp_file = $_FILES['uploadgambar']['tmp_name'];
-		$path = "../sales/".$random.'.'.$ext;
-		$pathdb = "sales/".$random.'.'.$ext;
+        // $nama_file = $_FILES['uploadgambar']['name'];
+		// $ext = pathinfo($nama_file, PATHINFO_EXTENSION);
+		// $random = crypt($nama_file, time());
+		// $ukuran_file = $_FILES['uploadgambar']['size'];
+		// $tipe_file = $_FILES['uploadgambar']['type'];
+		// $tmp_file = $_FILES['uploadgambar']['tmp_name'];
+		// $path = "../sales/".$random.'.'.$ext;
+		// $pathdb = "sales/".$random.'.'.$ext;
 
-        if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
-            if($ukuran_file <= 5000000){ 
-              if(move_uploaded_file($tmp_file, $path)){ 
+        // if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){
+        //     if($ukuran_file <= 5000000){ 
+        //       if(move_uploaded_file($tmp_file, $path)){ 
 		
-                $query = "insert into sales ( namasales, merk, gambar)
-                values('$namasales','$merk','$pathdb')";
+                $query = "insert into sales ( namasales, merk, nohp)
+                values('$namasales','$merk','$nohp')";
                 $sql = mysqli_query($conn, $query); // Eksekusi/ Jalankan query dari variabel $query
                 
                 if($sql){ 
@@ -32,21 +33,21 @@
                   echo "Sorry, there's a problem while submitting.";
                   echo "<br><meta http-equiv='refresh' content='5; URL=sales.php'> You will be redirected to the form in 5 seconds";
                 }
-    }else{
-        // Jika gambar gagal diupload, Lakukan :
-        echo "Sorry, there's a problem while uploading the file.";
-        echo "<br><meta http-equiv='refresh' content='5; URL=sales.php'> You will be redirected to the form in 5 seconds";
-      }
-    }else{
-      // Jika ukuran file lebih dari 1MB, lakukan :
-      echo "Sorry, the file size is not allowed to more than 1mb";
-      echo "<br><meta http-equiv='refresh' content='5; URL=sales.php'> You will be redirected to the form in 5 seconds";
-    }
-  }else{
-    // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
-    echo "Sorry, the image format should be JPG/PNG.";
-    echo "<br><meta http-equiv='refresh' content='5; URL=sales.php'> You will be redirected to the form in 5 seconds";
-  }
+//     }else{
+//         // Jika gambar gagal diupload, Lakukan :
+//         echo "Sorry, there's a problem while uploading the file.";
+//         echo "<br><meta http-equiv='refresh' content='5; URL=sales.php'> You will be redirected to the form in 5 seconds";
+//       }
+//     }else{
+//       // Jika ukuran file lebih dari 1MB, lakukan :
+//       echo "Sorry, the file size is not allowed to more than 1mb";
+//       echo "<br><meta http-equiv='refresh' content='5; URL=sales.php'> You will be redirected to the form in 5 seconds";
+//     }
+//   }else{
+//     // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
+//     echo "Sorry, the image format should be JPG/PNG.";
+//     echo "<br><meta http-equiv='refresh' content='5; URL=sales.php'> You will be redirected to the form in 5 seconds";
+//   }
 
 	};
 
@@ -73,6 +74,9 @@
 	
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- Start datatable css -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
@@ -192,11 +196,10 @@
 										 <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
                                          <tr>
 												<th>No.</th>
-                                                <th>Gambar</th>
 												<th>Nama sales</th>
 												<th>Merk</th>
-												<th>Tanggal</th>
-                                                <th>Jumlah Tagihan</th>
+                                                <th>Nomer Hp</th>
+                                                <th>Tanggal</th>
                                                 
                                                 
                                                 <!-- <a href="index.php?op=edit&id="><button type="button" class="btn btn-warning">Edit</button></a> -->
@@ -213,12 +216,10 @@
 												
 												<tr>
 													<td><?php echo $no++ ?></td>
-                                                    <td><img src="../<?php echo $p['gambar'] ?>" width="50%"\></td>
 													<td><?php echo $p['namasales'] ?></td>
 													<td><?php echo $p['merk'] ?></td>
-													<td><?php echo $p['date'] ?></td>
-                                                    <td><?php echo $p[''] ?></td>
-
+                                                    <td><?php echo $p['nohp'] ?></td>
+                                                    <td><?php echo $p['date'] ?></td>
                                                     <?php
                                                     // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
 													<td scope="row">
@@ -261,7 +262,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<h4 class="modal-title">Tambah Sales</h4>
-						</div>
+                            </div>
 						<div class="modal-body">
                         <form action="sales.php" method="post" enctype="multipart/form-data" >
 								<div class="form-group">
@@ -273,8 +274,8 @@
 									<input name="merk" type="text" class="form-control" required autofocus>
 								</div>
                                 <div class="form-group">
-									<label>Gambar</label>
-									<input name="uploadgambar" type="file" class="form-control">
+									<label>Nomer Handphone</label>
+									<input name="nohp" type="text" class="form-control">
 								</div>
 
 							</div>
@@ -286,7 +287,7 @@
 					</div>
 				</div>
 			</div>
-	
+
 	
 	<!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

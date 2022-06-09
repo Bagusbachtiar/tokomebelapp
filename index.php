@@ -362,6 +362,7 @@ include 'dbconnect.php';
 
 <!-- main slider-banner -->
 <script src="js/skdslider.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <link href="css/skdslider.css" rel="stylesheet">
 <script type="text/javascript">
 		jQuery(document).ready(function(){
