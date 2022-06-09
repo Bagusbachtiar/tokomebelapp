@@ -275,12 +275,10 @@ include 'dbconnect.php';
 			<h3 class="w3_agile_header">Tentang Kami</h3>
 			<div class="about-agileinfo w3layouts">
 				<div class="col-md-8 about-wthree-grids grid-top">
-					<h4>TokoMebel adalah salah satu proyek toko online berbasis Web</h4>
-					<p class="top">Top Facts
+					<h4>Toko Mebel Rizki </h4>
 						
 					<br>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				</div>
+					Toko Mebel Rizki adalah usaha yang bergerak dalam menyediakan barang kebutuhan masyarakat berupa furnitur rumah tangga seperti kasur, kursi, meja, lemari, sofa, dan lain sebagainya.</div>
 			</div>
 		</div>
 	</div>

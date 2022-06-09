@@ -26,15 +26,13 @@
                           // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
 			//   $query = "insert into tagihan (idsales,totaltagihan,expirationdate) values ('$idsales','$totaltagihan','$expirationdate') ";
 			  $query = "insert into tagihan (idsales,expirationdate) values ('$idsales','$expirationdate') ";
+              $sql = mysqli_query($conn, $query); 
               $query2 = "insert into detailtagihan (jumlah,hargasatuan,idproduk) values (' $jumlah','$hargasatuan','$idproduk') ";
-              
-
-              var_dump($query);
             
 
             // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
             
-			  $sql = mysqli_query($conn, $query, $query2); // Eksekusi/ Jalankan query dari variabel $query
+			  $sql = mysqli_query($conn, $query2); // Eksekusi/ Jalankan query dari variabel $query
 			  
 			  if($sql){ 
 				
@@ -174,7 +172,7 @@
                                         <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
                                         <tr>
                                                
-                                               <!-- <th>Gambar</th> -->
+                                               
                                                <th>Jumlah</th>
                                                <th>Nama Produk</th>
                                                <th>Harga Satuan</th>
@@ -188,11 +186,14 @@
 
                                            
                                            <?php 
-                                           // $brgs=mysqli_query($conn,"SELECT * from sales s, merk m where s.idkategori=m.idkategori order by idsales ASC");
+                                           
                                            $idsales=$_GET['idsal'];
-                                           $sal=mysqli_query($conn,"SELECT T.expirationdate, D.jumlah, D.idproduk, D.hargasatuan FROM tagihan T
+                                        //    $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
+                                           $sal=mysqli_query($conn,"SELECT T.expirationdate, D.jumlah, D.idproduk, D.hargasatuan, P.namaproduk FROM tagihan T
                                            INNER JOIN detailtagihan D ON T.idtagihan = D.idtagihan 
-                                           where idsales ='$idsales'"); 
+                                           INNER JOIN produk P ON D.idproduk = P.idproduk
+                                           WHERE idsales ='$idsales'"); 
+                                           
                                            while($p=mysqli_fetch_array($sal)){
                                             
                                             
@@ -200,7 +201,7 @@
                                                <tr>
                                               
                                                <td><?php echo $p['jumlah'] ?></td>
-                                               <td><?php echo $p['idproduk'] ?></td>
+                                               <td><?php echo $p['namaproduk'] ?></td>
                                                <td><?php echo $p['hargasatuan'] ?></td>
                                                <td><?php echo $p['expirationdate'] ?></td>
 

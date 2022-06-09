@@ -128,9 +128,9 @@
     <!-- page container area end -->
 	<div class="container mt-5">
   <div class="card im-box">
-    <h5 class="card-header">Udah Data Mahasiswa</h5>
+    <h5 class="card-header">Udah Data Tagihan</h5>
     <div class="card-body">
-      <h5 class="card-title">Form Edit Mahasiswa</h5>
+      <h5 class="card-title">Form Edit Tagihan</h5>
 
       <?php
       $id = $_GET['idtagihan'];
@@ -186,7 +186,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>By Richard's Lab</p>
+                <p></p>
             </div>
         </footer>
         <!-- footer area end-->
