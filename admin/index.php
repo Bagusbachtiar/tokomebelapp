@@ -243,7 +243,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>by Richard's Lab</p>
+                <p></p>
             </div>
         </footer>
         <!-- footer area end-->

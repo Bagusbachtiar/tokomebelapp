@@ -23,11 +23,16 @@
                     
 
             $idsales=(int)$_POST['id'];
+                          // $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
 			//   $query = "insert into tagihan (idsales,totaltagihan,expirationdate) values ('$idsales','$totaltagihan','$expirationdate') ";
-
 			  $query = "insert into tagihan (idsales,expirationdate) values ('$idsales','$expirationdate') ";
-              $query2 = "insert into detailtagihan (idsales,jumlah,hargasatuan,idproduk) values ('$idsales','$jumlah','$hargasatuan','$idproduk') ";
-                
+              $query2 = "insert into detailtagihan (jumlah,hargasatuan,idproduk) values (' $jumlah','$hargasatuan','$idproduk') ";
+              
+
+              var_dump($query);
+            
+
+            // $query=mysqli_query($conn,"INSERT INTO tagihan where idsales ='$idsales' ( gambar, expirationdate) values ( '$pathdb', '$expirationdate')"); 
             
 			  $sql = mysqli_query($conn, $query, $query2); // Eksekusi/ Jalankan query dari variabel $query
 			  
@@ -188,9 +193,9 @@
                                            $sal=mysqli_query($conn,"SELECT T.expirationdate, D.jumlah, D.idproduk, D.hargasatuan FROM tagihan T
                                            INNER JOIN detailtagihan D ON T.idtagihan = D.idtagihan 
                                            where idsales ='$idsales'"); 
-                                           while($p=mysqli_fetch_array($sal))
-                                           {
-                                               
+                                           while($p=mysqli_fetch_array($sal)){
+                                            
+                                            
                                                ?>
                                                <tr>
                                               
@@ -199,8 +204,7 @@
                                                <td><?php echo $p['hargasatuan'] ?></td>
                                                <td><?php echo $p['expirationdate'] ?></td>
 
-                                                  <?php
-                                                  // $i=mysqli_query($conn, "SELECT * from sales by idsales") ?>
+                                                  
                                                   <td scope="row">
                                                         <a href="detailtagihan.php?op=edit&idtagihan=<?php echo $p['idtagihan'] ?>"><button type="button" class="btn btn-warning">Lihat Tagihan</button></a>
                                                    

@@ -251,18 +251,11 @@ $idk = $_GET['idkategori'];
 					
 					<ul class="address">
 						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Toko Meubel Riski, Jombang.</li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@email">info@email</a></li>
+						<!-- <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@email">info@email</a></li> -->
 						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+6281 249 138 361</li>
 					</ul>
 				</div>
-				<div class="col-md-3 w3_footer_grid">
-					<h3>Tentang Kami</h3>
-					<ul class="info"> 
-						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.html">About Us</a></li>
-						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.html">How To</a></li>
-						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.html">FAQ</a></li>
-					</ul>
-				</div>
+				
 				<div class="clearfix"> </div>
 			</div>
 		</div>
@@ -270,7 +263,7 @@ $idk = $_GET['idkategori'];
 		<div class="footer-copy">
 			
 			<div class="container">
-				<p>© 2020 Richard's Lab. All rights reserved</p>
+				<p></p>
 			</div>
 		</div>
 		
@@ -278,11 +271,11 @@ $idk = $_GET['idkategori'];
 	<div class="footer-botm">
 			<div class="container">
 				<div class="w3layouts-foot">
-					<ul>
+					<!-- <ul>
 						<li><a href="#" class="w3_agile_instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 						<li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 						<li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-					</ul>
+					</ul> -->
 				</div>
 				<div class="payment-w3ls">	
 					<img src="images/card.png" alt=" " class="img-responsive">
