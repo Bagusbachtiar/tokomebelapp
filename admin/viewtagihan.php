@@ -188,11 +188,11 @@
                                            <?php 
                                            
                                            $idsales=$_GET['idsal'];
-                                        //    $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
-                                           $sal=mysqli_query($conn,"SELECT T.expirationdate, D.jumlah, D.idproduk, D.hargasatuan, P.namaproduk FROM tagihan T
-                                           INNER JOIN detailtagihan D ON T.idtagihan = D.idtagihan 
-                                           INNER JOIN produk P ON D.idproduk = P.idproduk
-                                           WHERE idsales ='$idsales'"); 
+                                           $sal=mysqli_query($conn,"SELECT * FROM tagihan where idsales ='$idsales'"); 
+                                        //    $sal=mysqli_query($conn,"SELECT T.expirationdate, D.jumlah, D.idproduk, D.hargasatuan, P.namaproduk FROM tagihan T
+                                        //    INNER JOIN detailtagihan D ON T.idtagihan = D.idtagihan 
+                                        //    INNER JOIN produk P ON D.idproduk = P.idproduk
+                                        //    WHERE idsales ='$idsales'"); 
                                            
                                            while($p=mysqli_fetch_array($sal)){
                                             
@@ -200,9 +200,7 @@
                                                ?>
                                                <tr>
                                               
-                                               <td><?php echo $p['jumlah'] ?></td>
-                                               <td><?php echo $p['namaproduk'] ?></td>
-                                               <td><?php echo $p['hargasatuan'] ?></td>
+                                               
                                                <td><?php echo $p['expirationdate'] ?></td>
 
                                                   
