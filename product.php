@@ -87,7 +87,7 @@ if(isset($_POST['addprod'])){
 <!DOCTYPE html>
 <html>
 <head>
-<title>Toko Meubel Riski - Produk</title>
+<title>Toko Mebel Riski - Produk</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -170,7 +170,7 @@ if(isset($_POST['addprod'])){
 				</ul>
 			</div>
 			<div class="w3ls_logo_products_left">
-				<h1><a href="index.php">Toko Riski Meubel</a></h1>
+				<h1><a href="index.php">Toko Riski Mebel</a></h1>
 			</div>
 		<div class="w3l_search">
 			<form action="search.php" method="post">

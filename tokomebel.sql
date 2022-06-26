@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2022 at 08:53 AM
+-- Generation Time: Jun 17, 2022 at 02:07 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -67,7 +67,6 @@ CREATE TABLE `detailtagihan` (
   `id` int(11) NOT NULL,
   `idproduk` int(11) NOT NULL,
   `idtagihan` int(11) NOT NULL,
-  `idkategori` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `hargasatuan` int(11) NOT NULL,
   `createdat` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -78,9 +77,9 @@ CREATE TABLE `detailtagihan` (
 -- Dumping data for table `detailtagihan`
 --
 
-INSERT INTO `detailtagihan` (`id`, `idproduk`, `idtagihan`, `idkategori`, `jumlah`, `hargasatuan`, `createdat`, `updatedat`) VALUES
-(1, 1, 1, 1, 2, 1500000, '2022-05-19 01:34:11', '2022-05-19 01:34:11'),
-(2, 1, 2, 1, 1, 2000000, '2022-05-19 01:34:11', '2022-05-19 01:34:11');
+INSERT INTO `detailtagihan` (`id`, `idproduk`, `idtagihan`, `jumlah`, `hargasatuan`, `createdat`, `updatedat`) VALUES
+(1, 9, 1, 5, 1540000, '2022-05-19 01:34:11', '2022-06-08 13:48:31'),
+(2, 5, 2, 1, 2000000, '2022-05-19 01:34:11', '2022-06-08 13:08:36');
 
 -- --------------------------------------------------------
 
@@ -102,7 +101,8 @@ INSERT INTO `kategori` (`idkategori`, `namakategori`, `tgldibuat`) VALUES
 (1, 'Lemari', '2019-12-20 07:28:34'),
 (2, 'Sofa', '2019-12-20 07:34:17'),
 (3, 'Kasur', '2020-03-16 12:15:40'),
-(4, 'Kursi', '2022-05-30 06:54:43');
+(4, 'Kursi', '2022-05-30 06:54:43'),
+(5, 'tet', '2022-06-08 13:06:48');
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,8 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`userid`, `namalengkap`, `email`, `password`, `notelp`, `alamat`, `tgljoin`, `role`, `lastlogin`) VALUES
 (1, 'Admin', 'admin', '$2y$10$GJVGd4ji3QE8ikTBzNyA0uLQhiGd6MirZeSJV1O6nUpjSVp1eaKzS', '01234567890', 'Indonesia', '2020-03-16 11:31:17', 'Admin', NULL),
 (2, 'Apri', 'Apri', '$2y$10$xXEMgj5pMT9EE0QAx3QW8uEn155Je.FHH5SuIATxVheOt0Z4rhK6K', '01234567890', 'Indonesia', '2020-03-16 11:30:40', 'Staff', NULL),
-(5, 'Japo', 'Japo', '$2y$10$4KoLh1/InvQ2S90rh1Zu6.Gky4hPs.v.v5/Qgj0mYRWJuqIScN.R2', '081081081998', 'Ngoro', '2022-05-30 14:39:55', 'Staff', NULL);
+(5, 'Japo', 'Japo', '$2y$10$4KoLh1/InvQ2S90rh1Zu6.Gky4hPs.v.v5/Qgj0mYRWJuqIScN.R2', '081081081998', 'Ngoro', '2022-05-30 14:39:55', 'Staff', NULL),
+(6, 'Indra', 'Indra', '$2y$10$1QbxZia3qOM4a.q5ZVvp0.wYF5a7zwRWcMREHHDZZSLnAa.v3pSXy', '018210281028', 'Jember', '2022-06-03 06:06:04', 'Staff', NULL);
 
 -- --------------------------------------------------------
 
@@ -200,12 +201,11 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`idproduk`, `idkategori`, `namaproduk`, `gambar`, `deskripsi`, `rate`, `hargabefore`, `hargaafter`, `tgldibuat`) VALUES
-(5, 1, 'Lemari Sliding', 'produk/16RAV0Tc42D4g.jpg', 'Lemari Sliding pintu Geser dengan ukuran lemari 3 pintu', 5, 4000000, 3800000, '2022-03-25 03:06:15'),
+(5, 3, 'Lemari Sliding', 'produk/16RAV0Tc42D4g.jpg', 'Lemari Sliding pintu Geser dengan ukuran lemari 3 pintu', 5, 4000000, 3800000, '2022-03-25 03:06:15'),
 (6, 2, 'Sofa 3 Seat', 'produk/162vIEzoKg.OU.jpg', 'Sofa  3 seat dengan kapasitas pengguna 3 orang berwarna putih', 5, 3900000, 3500000, '2022-03-25 03:21:56'),
 (7, 2, 'Sofa 3 Seat', 'produk/16IX2CGRpXtVM.jpg', 'Sofa  3 seat dengan kapasitas pengguna 3 orang berwarna coklat', 5, 3900000, 3700000, '2022-03-25 03:22:47'),
 (8, 3, 'Bed set Putih', 'produk/16yQTEmqXYk5Q.jpg', 'Bed set dengan Matras putih ukuran 150 dan divan putih ukuran 150', 5, 4800000, 4400000, '2022-03-25 03:26:41'),
-(9, 1, 'Lemari 2 Pintu', 'produk/16UUfcSMtVCx6.jpg', 'Lemari 2 Pintu warna Putih', 5, 2550000, 2155000, '2022-03-27 15:25:20'),
-(16, 3, 'Jangkar', 'produk/16er2jn.HOOyQ.jpg', 'test', 2, 121, 1212, '2022-05-26 07:40:54');
+(9, 1, 'Lemari 2 Pintu', 'produk/16UUfcSMtVCx6.jpg', 'Lemari 2 Pintu warna Putih', 5, 2550000, 2155000, '2022-03-27 15:25:20');
 
 -- --------------------------------------------------------
 
@@ -218,6 +218,7 @@ CREATE TABLE `sales` (
   `gambar` varchar(100) NOT NULL,
   `namasales` varchar(50) NOT NULL,
   `merk` varchar(40) NOT NULL,
+  `nohp` varchar(50) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -225,13 +226,10 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`idsales`, `gambar`, `namasales`, `merk`, `date`) VALUES
-(1, '', 'Bagus', 'apollo', '2022-04-01 14:24:01'),
-(2, '', 'Adi', 'Sofa', '2022-04-01 15:06:29'),
-(3, '', 'SSA', 'WQW', '2022-04-01 15:07:13'),
-(4, '', 'HAH', 'ass', '2022-04-02 06:43:03'),
-(5, 'sales/16.nqw4Y5fdqM.jpg', 'qwq', 'ewqe', '2022-05-26 08:18:11'),
-(6, 'sales/16er2jn.HOOyQ.png', 'hahaa', 'OLOL', '2022-06-02 06:50:47');
+INSERT INTO `sales` (`idsales`, `gambar`, `namasales`, `merk`, `nohp`, `date`) VALUES
+(1, '', 'Bagus', 'apollo', '081249138361', '2022-06-09 07:56:40'),
+(2, '', 'Adi', 'Sofa', '082889746552', '2022-06-09 07:57:01'),
+(7, '', 'ABC', 'BCA', '123283842923', '2022-06-09 08:06:36');
 
 -- --------------------------------------------------------
 
@@ -242,7 +240,7 @@ INSERT INTO `sales` (`idsales`, `gambar`, `namasales`, `merk`, `date`) VALUES
 CREATE TABLE `tagihan` (
   `idsales` int(11) NOT NULL,
   `idtagihan` int(11) NOT NULL,
-  `totaltagihan` decimal(10,2) NOT NULL,
+  `totaltagihan` varchar(100) NOT NULL,
   `gambar` varchar(100) NOT NULL,
   `createdat` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -255,7 +253,11 @@ CREATE TABLE `tagihan` (
 
 INSERT INTO `tagihan` (`idsales`, `idtagihan`, `totaltagihan`, `gambar`, `createdat`, `updatedat`, `expirationdate`) VALUES
 (1, 1, '1500000.00', '', '2022-05-19 10:46:00', '2022-05-19 10:46:00', '2022-05-19 12:44:52'),
-(2, 2, '2500000.00', '', '2022-05-20 01:54:20', '2022-05-20 01:54:20', '2022-05-20 03:53:49');
+(2, 2, '2500000.00', '', '2022-05-20 01:54:20', '2022-05-20 01:54:20', '2022-05-20 03:53:49'),
+(1, 18, '0.00', '', '2022-06-06 12:49:20', '2022-06-06 12:49:20', '2022-06-08 00:00:00'),
+(1, 20, '', '', '2022-06-06 12:50:51', '2022-06-06 12:50:51', '2022-06-09 00:00:00'),
+(1, 21, '', '', '2022-06-08 12:52:35', '2022-06-08 12:52:35', '2022-06-16 00:00:00'),
+(1, 22, '1212121212', '', '2022-06-08 12:54:24', '2022-06-08 12:54:24', '2022-06-18 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -354,7 +356,7 @@ ALTER TABLE `detailtagihan`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `idkategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idkategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `konfirmasi`
@@ -366,7 +368,7 @@ ALTER TABLE `konfirmasi`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -384,13 +386,13 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `idsales` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idsales` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  MODIFY `idtagihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idtagihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
@@ -414,12 +416,6 @@ ALTER TABLE `konfirmasi`
 --
 ALTER TABLE `produk`
   ADD CONSTRAINT `idkategori` FOREIGN KEY (`idkategori`) REFERENCES `kategori` (`idkategori`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tagihan`
---
-ALTER TABLE `tagihan`
-  ADD CONSTRAINT `tagihan_ibfk_1` FOREIGN KEY (`idtagihan`) REFERENCES `detailtagihan` (`idtagihan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
