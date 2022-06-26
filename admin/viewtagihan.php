@@ -173,11 +173,10 @@
                                         <tr>
                                                
                                                
-                                               <th>Jumlah</th>
-                                               <th>Nama Produk</th>
-                                               <th>Harga Satuan</th>
+                                               
                                                <th>jatuh tempo</th>
-                                               <th></th>
+                                               <th>Masuk</th>
+                                               
                                         
                                                
 
